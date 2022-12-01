@@ -1,0 +1,1059 @@
+CAPITOLO 1
+            1.1.1 UNA DESCRIZIONE PRATICA
+Useremo due definizioni per descrivere Internet, cioè un primo modo l’hardware di base e i componenti software che la costituiscono e un secondo modo è descrivere Internet in termini di infrastrutture di rete che forniscono servizi di applicazioni distribuite.
+- La Internet pubblica è una rete che collega tra loro milioni di unità di calcolo (PC, stazioni Unix, PDA-Personal Digital Assistant, Web Tv, portatili) sparse per tutto il globo. Tutti questi dispositivi sono chiamati host o end system(terminali). I terminali sono collegati tra loro attraverso link di comunicazione. Diversi link posso trasmettere dati a differenti velocità di trasmissione (spesso detta larghezza di banda del link, bit/sec). Normalmente i terminali non sono collegati direttamente tra loro, ma in modo indiretto attraverso dispositivi di comunicazione, i router. I router preleva un “pezzo” (pacchetto) delle informazioni che arrivano su uno dei suoi link di comunicazione in entrata e lo reindirizza a uno dei link di comunicazione in uscita. L’itinerario compiuto dal pacchetto nella rete dal terminale origine al terminale ricevente è detto cammino (router) o percorso (path). I terminali accedono a Internet attraverso gli Internet Service Providers (ISP). Ogni ISP è una rete di router e di link di comunicazione. I diversi ISP forniscono ai terminali diversi tipi di accesso alla rete e consentono l’accesso a Internet anche ai fornitori di contenuto, connettendo direttamente a Internet i siti Web. Per permettere la comunicazione tra gli utenti di Internet e per permettere agli utenti di accedere ai contenuti di Internet sparsi per il mondo, questi ISP di livello inferiore sono interconnessi attraverso ISP nazionali e internazionali di livello superiore. I terminali e alcuni “pezzi” di Internet eseguono protocolli che controllano l’invio e la ricezione di informazioni all’interno dell’Internet.
+- La Internet pubblica è la rete a cui ci si riferisce parlando di Internet. Esistono anche reti private come quelle governative, i cui host non possono scambiare messaggi con gli host esterni alla rete privata, a meno che i messaggi non possano attraversare i firewall che servono a selezionale il traffico da e verso la rete. Queste reti private sono chiamate Intranet, poiché usano gli stessi tipi di host, router, link, protocolli e standard di Internet pubblica. A livello tecnico e di sviluppo, internet è resa possibile dalla creazione e implementazione degli Internet standard. Questi standard sono sviluppati dall’Internet Engineering Task Force (IETF) e i documenti degli standard IETF sono chiamati RFC (request for comments, richieste di osservazione). Le RFC sono molto tecniche e dettagliate e definiscono i protocolli.
+
+            1.1.2 CHE COS’E UN PROTOCOLLO?
+Innanzitutto, per poter raggiungere gli obiettivi le due o più entità presenti devono adottare lo stesso protocollo. Un protocollo di rete è simile a un protocollo umano, eccezion fatta per le entità che si scambiano messaggi e compiono azioni che sono componenti hardware e software di alcuni dispositivi. Tutte le attività Internet che coinvolgono due o più entità remote alla comunicazione sono gestite da protocolli. Abbiamo diversi protocolli:
+    • Protocollo nei router -> determina il percorso del pacchetto dalla sorgente al destinatario
+    • Protocollo dell’hardware -> nelle schede di interfaccia con la rete di due calcolatori fisicamente connessi controllano il flusso di bit sul cavo fra le due schede di interfaccia
+    • Protocollo nei terminali -> per controllare la congestione regolando la velocità con cui i pacchetti sono trasmessi tra la sorgente e il destinatario
+    • Protocolli di Rete -> sono quelli predominanti che studieremo e approfondiremo più avanti
+
+Un protocollo definisce il formato e l’ordine dei messaggi scambiati tra due o più entità comunicanti, così come le azioni che hanno luogo a seguito della trasmissione e/o ricezione di un messaggio o di altri eventi.
+
+1.3.1 	COMMUTAZIONE A CIRCUITO E COMMUTAZIONE A PACCHETTO
+Esistono due principali tipi di approccio per la costruzione della sezione interna di una rete: la commutazione di circuito (Circuit switching) e la commutazione a pacchetto (Packet switching).
+
+Commutazione a circuito -> in questo tipo di rete le risorse necessarie lungo un percorso (buffer, link a larga banda), per fornire la comunicazione fra due terminali, sono riservate per la durata della sessione. Lo sono le reti telefoniche.
+In poche parole, quando una persona vuole inviare informazioni attraverso la rete telefonica, prima che l’informazione possa partire bisogna prima stabilire una connessione tra chi invia e chi riceve. Questa connessione poi sarà mantenuta per tutta la durata del collegamento ed è detta circuito. Inoltre, quando viene stabilità una connessione essa riserva anche una velocità di trasmissione costante per tutta la durata del collegamento.
+Commutazione a pacchetto -> queste risorse non sono riservate. I messaggi della sessione usano le risorse a richiesta e, di conseguenza, devono aspettare (mettersi in coda) per accedere al link di comunicazione. Lo è l’attuale Internet.
+Quando un host vuole inviare un pacchetto a un altro host attraverso Internet il pacchetto è inviato su una serie di link di comunicazione. Però questo invio avviene senza prenotare alcuna lunghezza di banda. Se uno dei link è congestionato perché altri pacchetti richiedono di essere trasmessi attraverso di esso nello stesso tempo, il nostro pacchetto deve aspettare in un buffer situato all’estremità di spedizione della linea di trasmissione, e subirà un ritardo. Internet utilizza una modalità di funzionamento detta best effort, cioè fa del suo meglio per inviare i dati in tempo quasi reale, ma non fornisce alcuna garanzia che ciò avvenga.
+[Esempio: immaginiamo due ristoranti, uno che richiede la prenotazione e uno che né richiede né accetta alcuna prenotazione. Per il ristorante che richiede la prenotazione prima di uscire di casa dobbiamo preoccuparci di telefonare per riservare i posti. Ma una volta arrivati possiamo, di diritto, immediatamente comunicare con il cameriere e ordinare il pasto. Per i ristornati che non richiede prenotazione, non abbiamo la necessita di disturbarci per riservare un tavolo. Ma quando arriviamo dobbiamo aspettare un tavolo libero prima di poter comunicare con il cameriere]
+I fautori della comunicazione di pacchetto sostengono che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono inattivi durante i periodi silenti.
+
+COMMUTAZIONE A PACCHETTO
+Abbiamo visto come i protocolli di livello applicativo scambiano messaggi nell’esecuzione dei loro compiti. Nelle moderne reti di calcolatori, la sorgente suddivide i messaggi lunghi in pezzi più piccoli di dati conosciuti come pacchetti. Tra sorgente e destinazione, ciascuno di questi pacchetti viaggia lungo link e commutatori di pacchetto(router). I pacchetti vengono trasmessi alla velocità massima del link di comunicazione.
+Router -> utilizzano la trasmissione store-and-forward (immagazzinamento e rilascio). Ciò significa che il router deve ricevere l’intero pacchetto prima di poter cominciare a trasmettere il primo bit sul link di uscita. Questo introduce un ritardo che è proporzionale alla lunghezza in bit del pacchetto. Se un pacchetto consiste di L bit e deve inoltrare su un link in uscita a R bit/s, il ritardo store-and-forward = L/R sec.
+Ogni router è collegato a molti link. Per ciascun link cui è collegato il router ha un buffer in uscita (detta anche coda di uscita) che immagazzina pacchetti che il router si appresta a spedire su quel determinato link. Se un pacchetto in arrivo trova il link di trasmissione occupato da un altro pacchetto, il pacchetto in arrivo deve aspettare nel buffer di uscita. Quindi in aggiunta al ritardo s-a-f, i pacchetti subiscono il ritardo dovuto alla coda nel buffer in uscita (ritardo di coda, queuing delay). Nel caso in cui la coda è completamente occupata può accadere una perdita di pacchetti, e può andar perso sia il pacchetto in arrivo sia uno di quelli già in coda.
+
+CONFRONTO TRA COMMUTAZIONE DI PACCHETTO E COMMUTAZIONE DI CIRCUITO
+Perché la commutazione di pacchetto è più efficiente?
+Supponiamo che gli utenti si dividano un link di 1Mbps. Ammettiamo che ciascun utente alteri periodi attività (quando genera dati alla velocità costante di 100kbps) a periodi di inattività (quando non genera dati). Supponiamo infine che l’utente sia attivo solo per il 10% del tempo e di conseguenza inattivo per il restante 90%.
+Commutazione di circuito devono essere riservati 100 kbps a ciascun utente per tutto il tempo. Quindi il link che noi abbiamo può soddisfare contemporaneamente solo 10 utenti (= 1 Mbps/100kbps = 1000kbps/100kbps).
+Commutazione di pacchetto è la probabilità che uno specifico utente sia attivo è 0,1. Se ci sono 35 utenti, la probabilità che ci siano 11 o più utenti attivi simultaneamente è circa 0,0004. Quindi quando ci sono <= 10 utenti attivi simultaneamente (il che accade con probabilità 0,9996), la velocità dei dati aggregati in arrivo è inferiore o uguale a 1Mbps (la velocità in uscita dal link).  Quindi i pacchetti degli utenti fluiscono attraverso il link praticamene senza ritardo, come anche nel caso della commutazione di circuito. Ma se gli utenti attivi sono più di 10, la velocità dei pacchetti supera la capacità di uscita dal link, e inizia a crescere la coda.
+Quindi la commutazione di pacchetto ha le stesse prestazioni della commutazione di circuito, ma con un numero di utenti tre volte superiore.
+
+
+FRAMMENTAZIONE DEL MESSAGGIO
+In una moderna rete a commutazione di pacchetto, la sorgente (host) frammenta i lunghi messaggi in pacchetti più piccoli e invia questi ultimi nella rete; il destinatario riassembla i pacchetti fino a ottenere il messaggio originale.
+Una rete a commutazione a pacchetto effettua una commutazione a messaggio se la sorgente non frammenta i messaggi, cioè inviano in rete il messaggio completo. Quindi la Commutazione a messaggio è un tipo specifico di commutazione a pacchetto.
+
+1.3.2	INOLTRO DEI PACCHETTI
+Esistono due grandi classi di reti a commutazione di pacchetto:
+- Rete Datagram è una rete che invia i pacchetti in base all’indirizzo dell’host di destinazione. I router di Internet inviano i pacchetti in funzione dell’indirizzo di destinazione; quindi, Internet è una rete datagram. Le reti datagram sono analoghe per molti aspetti al servizio postale e sono gerarchiche. Quando un pacchetto arriva al commutatore di pacchetto nella rete, il commutatore esamina una porzione dell’indirizzo e invia il pacchetto a un commutatore adiacente. Ogni commutatore di pacchetto ha una tabella di instradamento che mette in corrispondenza l’indirizzo con un link in uscita. E così via per i commutatori successivi. Questo processo di instradamento viene chiamato end-to-end. Può fornire sia il servizio senza connessione che quello con la connessione.
+- Rete a circuito virtuale (CV)à è una rete che invia i pacchetti in base alla numerazione dei circuiti virtuali. È Quando nella rete è stabilito un VC fra sorgente e destinatario, i pacchetti possono essere spediti con gli appropriati numeri di VC. Poiché un VC ha numeri diversi su ciascun link, un commutatore intermedio deve sostituire il numero di VC di ciascun pacchetto in transito con uno nuovo. Il nuovo numero di VC si ottiene dalla tabella di conversione dei numeri di VC. I commutatori della rete devono mantenere le informazioni sullo stato delle connessioni in corso. Ogni volta che si stabilisce una nuova connessione attraverso un commutatore, una nuova voce relativa alla connessione deve essere aggiunta alla tabella di conversione dei numeri di VC; e ogni volta che una connessione viene terminata dalla tabella deve essere rimossa la voce. Forniscono sempre il servizio orientato alla connessione.
+Esistono due grandi classi di reti a commutazione di circuiti:
+- FDM (multiplexing a divisione di frequenza)
+- TDM (multiplexing a divisione di tempo)
+
+
+1.4.1	ACCESSO ALLA RETE
+Parleremo dell’accesso alla rete (il link fisico che collega un terminale al suo router di confine) cioè, il primo router su percorso che parte dal terminale e arriva a qualunque terminale distante.
+Può essere classificato in tre categorie: - accesso domestico, collega alla rete un terminale casalingo;
+			  - accesso aziendale, collega alla rete i terminali di imprese e istituti scolastici;
+			 - accesso per terminali “mobili”, collega alla rete un terminale mobile.
+
+1.6.1	RITARDI E PERDITE NELLE RETI A COMMUTAZIONE DI PACCHETTO
+Consideriamo adesso cosa succede a un pacchetto durante il percorso dalla sorgente alla destinazione. Un pacchetto parte da un host (la sorgente), passa attraverso una serie di router, e termina il suo viaggio in un altro host (il destinatario). Quando un pacchetto passa da un nodo (host o router) al nodo seguente lungo il suo percorso, in ciascun nodo soffre di diversi tipi di ritardo.
+Questi ritardi sono:
+                1. Ritardo di elaborazione del nodo: è il tempo richiesto per esaminare l’intestazione del pacchetto e per determinare dove instradarlo. Questo ritardo può comprendere altri fattori, come il tempo necessario per controllare eventuali errori livello di bit nel pacchetto. Nei router ad alta velocità il ritardo di elaborazione è tipicamente dell’ordine di microsecondo (10^-6) o inferiore.
+2. Ritardo di coda: è il ritardo subito quando il pacchetto è accodato, cioè è in attesa di essere trasmesso sul link. Questo ritardo dipende dal numero degli altri pacchetti, arrivati prima, che sono accodati e stanno aspettando di essere trasmessi. Questo ritardo può essere estremamente variabile, può essere zero se non si sono pacchetti in coda, e può essere consistente se il traffico è pesante e molti altri pacchetti si trovano accodati. Questo ritardo è dell’ordine dai millisecondi (10^-3) ai microsecondi (10^-6).
+3. Ritardo di trasmissione (ritardo store-and-forwarda): assumendo che i pacchetti siano spediti col metodo primo arrivato-primo spedito (FIFO), il nostro pacchetto può essere trasmesso quando tutti i pacchetti arrivati prima di lui sono stati trasmessi. Sia la lunghezza del pacchetto L bit, la velocità di trasmissione R bit/s del link tra i router A e B. [ad esempio per un link Ethernet da 10Mbps, la velocità è R = 10Mbps] Quindi il ritardo di trasmissione lo otteniamo tramite L/R, ed è l’ammontare del tempo richiesto per trasmettere tutti i bit del pacchetto nel link, inoltre è dell’ordine dai microsecondi ai millisecondi.
+4. Ritardo di propagazione: [SCHEDA]
+
+Confronto tra ritardo di propagazione e ritardo di propagazione
+Ritardo di trasmissione -> è il tempo richiesto dal router per spingere all’esterno il pacchetto; ed è in funzione della lunghezza del pacchetto e della velocità di trasmissione del link.
+Ritardo di propagazione -> è il tempo che impiega un bit a propagarsi da un router al successivo; ed è funzione della distanza fra i due router.
+
+1.7.2	LA PILA PROTOCOLLARE DI INTERNET
+La pila di protocollo è costituita da cinque strati: fisico, collegamento, rete, trasporto e applicazione. Uno strato protocollare può essere implementato dal software, dall’hardware o da una combinazione di entrambe.
+Lo strato fisico e quello di collegamento sono responsabili della gestione della comunicazione su uno specifico link, essi sono in genere implementati in una scheda d’interfaccia della rete associata a un dato link. I protocolli di strato applicativo (come HTTP e SMTP) sono quasi sempre implementati dal software nei terminali; come avviene anche per i protocolli dello strato di trasporto. Lo strato di rete ha di solito implementazione mista.
+Strato applicativo: responsabile del supporto delle applicazioni di rete (protocollo http, SMTP, FTP).
+Strato di trasporto: fornisce il servizio di trasporto dei messaggi dello strato di applicazione fra le estremità client e server di un’applicazione. In Internet ci sono due protocolli di trasporto TCP e UDP.
+Strato di rete: è responsabile dell’instradamento dei datagram da un host all’altro. Questo strato ha 2 componenti principali: 1) ha un protocollo che definisce il campo nel datagram IP; 2) come i terminali e i router agiscono su questi campi. Esiste un solo protocollo IP e tutti i componenti di Internet che hanno uno strato di rete devono impiegare il protocollo IP.
+[I protocolli dello strato di Internet (TCP e UDP) in un host sorgente passano un segmento dello strato di trasporto e un indirizzo di destinazione allo strato IP, proprio come facciamo quando consegniamo una lettera con l’indirizzo del destinatario al servizio postale]
+Strato di collegamento: instrada un pacchetto attraverso una serie di commutatori di pacchetto (i router) fra sorgente e destinazione.
+Strato fisico: muove singoli bit all’interno della rete da un nodo al successivo. I protocolli in questo strato sono dipendenti dal link, e dipendono anche dal mezzo trasmissivo del link (doppini, fibre ottiche).
+
+
+
+
+
+CAPITOLO 2
+Le applicazioni di rete sono la ragione d’essere di una rete di calcolatori
+
+2.1	PRINCIPI DEI PROTOCOLLI DELLO STRATO DI APPLICAZIONE
+Nel gergo dei SO, in realtà non sono i pezzi di software (cioè i programmi) a comunicare ma i processi. Un processo può essere pensato come un programma che sta girando all’interno di un terminale. Quando processi diversi che stanno girando sullo stesso terminale comunicano tra loro lo fanno usando la commutazione interprocesso.
+I processi su diversi terminali comunicano tra loro scambiandosi messaggi attraverso la rete di calcolatori. Un processo sorgente crea e spedisce messaggi nella rete; un processo ricevente riceve questi messaggi ed eventualmente rispedisce messaggi di ritorno. Questo scambio avviene a livello applicativo attraverso dei protocolli.
+    • Un protocollo a livello applicativo definisce lo scambio dei messaggi, soprattutto:
+    • I tipi di messaggi scambiati
+    • La sintassi dei vari tipi di messaggio, per esempio i campi del messaggio
+    • La semantica dei campi, cioè il significato dell’informazione nei campi
+    • Le regole per determinare quando e come un processo invia messaggi o risponde a messaggi
+Solitamente un’applicazione di rete ha due “lati”, un lato client e un lato server. L’host che inizia la sessione è etichettato come client. Molte applicazioni coinvolgono due processi in due diversi host che comunicano tra loro attraverso la rete. Un processo invia messaggi nella reta e li riceve attraverso il proprio socket. Il socket può essere immaginato come una porta reale, quando un processo vuole inviare un messaggio a un altro processo, su un altro host, esso invia il messaggio fuori dalla propria porta (socket). Il processo presume che dall’altra parte della porta ci sia un’infrastruttura di trasporto che trasporterà il messaggio attraverso Internet fino alla porta del processo destinatario. Una volta che il messaggio è arrivato all’host di destinazione, il messaggio attraversa la porta (socket) del processo ricevente ed è reso disponibile a quest’ultimo.
+Socket => costituisce l’interfaccia fra gli strati di applicazione e di trasporto all’interno dell’host. Ci si riferisce anche come API (application programmers’s interfaces, interfaccia con le applicazioni) fra le applicazioni e la rete.
+
+Indirizzamento dei processi
+Perché avvenga l’invio di messaggi tra due host, il processo che trasmette deve identificare il processo ricevente. Per l’identificazione del processo ricevente occorre: 1) il nome o l’indirizzo della macchina host; 2) un identificatore che specifichi l’identità del processo ricevente dell’host di destinazione.
+    1) L’host è specificato tramite l’indirizzo IP. Questo è una quantità di 32 bit che identificano in modo univoco il terminale (più precisamente identifica in modo unico l’interfaccia di rete che connette quell’host a Internet);
+    2) In Internet un numero di porta del lato ricevente assolve a questo scopo.
+I più diffusi protocolli dello strato applicativo hanno numeri di porta specifici: HTTP porta 80, SMTP porta 25, […].
+Agente dell’utente (user agent) => è un’interfaccia fra l’utente e le applicazioni di rete. È un’applicazione installata sul computer dell’utente che si connette ad un processo server. Esempi di user agent sono i browser web, i lettori multimediali e programmi client (Mail User Agent) come Outlook […]. Quando gli utenti di Internet visitano un sito web, una stringa di testo è solitamente inviata per fare identificare al server lo user agent. Questo fa parte della richiesta HTTP, con prefisso "User-agent:" o "User-Agent:" e tipicamente include informazioni come il nome dell'applicazione client, la versione, il sistema operativo e la lingua.
+
+2.1.3	SERVIZI FORNITI DAI PROTOCOLLI DI TRASPORTO INTERNET
+Internet rende disponibile alle applicazioni due protocolli di trasporto:
+    • UDP (User Datagram Protocol) è un mccanismo leggero, con un modello di servizio minimale.
+- E’ senza connessine quindi non c’è handshake;
+- Servizio di trasferiemto dati non affidabile cioè quando un processo spedisce un messaggio in un socket UDP, l’UDP non da garanzie che il messaggio raggiungerà il socket ricevente;
+- I messaggi possono non arrivare in ordine al ricevente;
+- NO Controllo congestione, così un processo che spedisce può inviare dati nella socket dell’UDP a qualsiasi velocità, sebbene non tutti i dati possono raggiungere il socket ricevente;
+(Spesso viene scelto per le aplicazioni audio e video in tempo reale, dato che l’importante non è la perdita di dati ma richiede che venga rispetta una velocità minima)
+- Non fornisc e garanzie sul ritardo.
+    • TCP (Transmission Control Protocol) comprende:
+- Servizio orientato alla connessione cioè TCP effettua lo scambio tra client e serve delle informazioni dello strato di trasporto prima che i messaggi dello strato di applicazione comincino a fluire. Questa procedura è detta di “handshake” e allerta client e sserver permettendo loro di prepararsi per l’arrivo massiccio di pacchetti. Dopo la fare di handshake si dice che esiste una connessione TCP fra i socket dei due processori. La connessione è di tipo full-duplex perché i due processori possono inviare e ricevere contemporaneamente. Quando un applicazione ha concluso l’invio dei messaggi, essa deve interrompere la connessione;
+- Servizio di trasporto affidabile cioè i processi possono confidare sul TCP per il recapito di tutti i dati spediti senza errori e nell’ordine apporpriato. Può contare che l’invio avverrà senza alcun bit mancante o duplicato;
+- Meccanismo di controllo della congestione che tenta di limitare ciascuna connessione TCP alla sua equa porzione della lunghezza di banda quando la rete è congestionata (può avere un effetto dannoso sulle applicazioni audio e video in tempo reale);
+- Non garantisce una velocità minima di trasmissione dei dati, la veocità non può essere una qualsiasi ma è regolata dal servizio di controllo della congestione del TCP;
+- Non fornisce garanzie sul ritardo.
+TCP: email, accesso a terminale remoto, Web e strasferiemnto dati.
+UDP: telefonia internet.
+
+2.2	WEB E HTTP(Hypertext Transfer Protocol)
+All’inizio degli anni ’90 arrivò sulla schena il World Wide Web. Il Web è l’applicazione Internt che attirò il pubblico.
+Pagine Web (chiamata anche documento) -> consiste di oggetti. Un oggetto è un file (come un file HTML, un’immagine JPEG o GIF, un Java applet, un audio clip ecc) che è imdrizzata attraverso un singolo URL [Ad esempio se una pagine Web contiene testo HTML e 5 immagini JPEG, allora la pagina Web ha 6 oggetti]. Molte pagine Web consistono di un file base HTML e da molti oggetti referenziati. Il file base HTML rinvia agli altri oggetti della pagina attraverso gli URL degli oggetti. Ciascun URL ha due componenti:
+    1. Host name (nome dell’host) del server che contiene gli oggetti
+    2. Nome del percorso per raggiungere gli  oggetti (path)
+
+    • Browser (interprete) -> è un agente dell’utente per il Web. Esso mostra la pagina Web richiesta e fornisce molte caratteristiche di navigazione e configurazione. Il browser del Web implementano anche il lato client dell’HTTP.
+    • Server Web -> memorizza gli oggetti Web, ciascuno indirizzabile da un URL. I server Web implementano anche il lato server dell’HTTP.
+HTTP -> è il protocollo dello strato di applicazione del Web ed è implementato in due programmi: un programma client e un server. Questi programmi (client e server) sono eseguiti su due terminali diversi e comunicano tra loro attraverso messaggi HTTP. HTTP definisce la struttura di questi messaggi e il modo in cui il client e server se li scambiano.
+
+-> definisce come i client Web (browser) richiedono le pagine Web dai server (cioè i server Web) e come i server trasferiscono le pagine Web ai client. In linea generale quando un utente richiede una pagina Web, il browser invia messaggi di richiesta all’HTTP per gli oggetti nella pagina al server. Il server riceve la richiesta e risponde con messaggi di risposta HTTP conteneti gli oggetti.
+Le due versioni di HTTP sono compatibili tra di loro e possono “parlare” tra loro.
+
+Passi di connessione non persistente:
+- cient HTTP inizia connessini TCP con il server
+- dopo la connessione, i processi di browser e server accedono al TCP attraverso la loro interfaccia socket
+- il client invia messaggi di richiesta HTTP nel suo socket e da questo riceve messaggi di risposta HTTP. In modo analogo il server HTTP riceve messaggi di risposat dal suo socket e invia messaggi di risposta
+- il server HTTP dice al TCP di concludere la connessione TCP
+- il client HTTP riceve il messaggio di risposta, la connessione TCP si conclude. Il messaggio indica che l’oggetto incapsulato è un file HTML, il client estrae il file dal messaggio e lo analizza trovando i riferiemetni agli oggetti richiesti.
+- tutti questi passi vengono ripeturi per ciascuno degli oggetti cui si fa riferimento
+Il TCP fornisce un trasferimento affidabile, questo impica che ciarcun messaggio di richiesta HTTP emesso dal processo client alla fine arriva intatto al server. Qui notiamo un grande vantaggio dell’architettura a strati: L’HTTP non deve preoccuparsi dei dati persi, o dei dettagli sul modo in cui il TCP ritrova o riordina i dati entro la rete. Questo è compito del TCP e dei protocolli degli strati più bassi della pila protocollare.
+Protocollo senza stato (stateless protocol): è quando un server HTTP non tiene traccia delle informazioni relative ai client.
+Ciascuna connessione TCP trasporta esattamente un messaggio di richiesta e un messaggio di risposta.
+HTTP/1.0: -TCP come protocollo di trasporto sottostante (piuttosto che usare UDP);
+-connessione non persistente: su una connessione TCP è trasferito un singolo oggetto Web;
+-permette metodi GET, POST, HEAD;
+HTTP/1.1: -TCP come protocollo di trasporto sottostante (piuttosto che usare UDP);
+	-connessione non persistente nella sua modalità di default;
+	-connessione persistente con pipelining;
+	-permette metodi GET, POST, HEAD, PUT (permette a un utente di caircare un oggetto su uno specifico path (directory) di uno specifico server WEB) e DELETE (permette all’utente/applicazione di cancellare un oggetto da un server WEB);
+RTT (Round trip time): tempo occorrente a un piccolo pacchetto per viaggiare dal client al server e ritronare al clinet. Il RTT comprende il ritardo di propagazione del pacchetto, il ritardo di coda nei router intermedi e nei commutatori e il ritardo di elaborazione del pacchetto.
+Le connessioni non persistenti hanno alcuni difetti. 1)per ogni oggetto richiesto una nuova connessione deve essere stabilita e mantenuta. Per ciascuna di queste connessioni devono essere allocate i buffer del TCP e le variabili del TCP devono essere conservate sia nel client sia nel server; questa situazione potrebbe caricare il server Web, che potrebbe dover smaltire simultaneamente le richieste di centinaia di client. 2) ciascun oggetto subisce due RTT.
+
+Passi connessione persistente:
+Con la connessione persistente il server lascia aperta la connessione TCP dopo aver spedito la risposta, così le successive richieste e risposte fra gli stesi client e server possono essere inviate sulla stessa connessione. Il server HTTP chiude la connessione dopo un certo periodo di tempo in cui essa non viene più usata (intervallo di timeout configurabile).
+La connessione persistente è di due tipi:
+1. Senza parallelismo (without pipelining) il client emette una nuova richiesta solo quando la risposta precedente è stata ricevuta. In questo caso ciascuno degli oggetti a cui si rimanda è soggetta a un RTT per richieder e ricevere l’oggetto stesso. Questo è un miglioramento delle connessioni non persistenti, ma con il pipelining si può ridurre ulteriormente. Altro svantaggio è che dopo la spedizione di un oggetto la connessione TCP rimane in attesa dell’arrivo di un’altra richiesta e questo comporta spreco delle risorse del server.
+2. Con parallelismo (with pipelining) il client emette una richiesta non appena incorna un riferimento. Il client HTTP può fare richieste consecutive (back-to-back) per gli oggetti in riferimento, cioè può fare una nuova richiesta prima di ricevere la risposta alla precedente. Quando il server riceve le richieste, può inviare gli oggetti back to back. In questo modo si usa un solo RTT per tutti gli oggetti in riferimento e la connessione TCP con pipelining resta in attesa per una frazione di tempo più piccola.
+
+2.2.3	FORMATO DEL MESSAGGIO HTTP
+I messaggi HTTP sono di due tipi, messaggi di richiesta e messaggi di risposta.
+Messaggio di richiesta: messaggio scritto in testo ASCII normale, così che il pc lo possa leggere. È composto da cinque linee (ma può averne anche meno o di più).
+    1. Linea di richiesta (request line): è solo la prima riga e ha tre campi. Il campo metodo (piò essere GET, POST e HEAD), il campo URL e il campo versione dell’HTTP. Il metodo GET è usato quando un browser richiede un oggetto, con l’oggetto richiesto identificato nel campo URL.
+    2. Linee di intestazione (header line): sono le linee seguenti. La linea Host su cui l’oggetto risiede. La linea di intestazione Connection (close o open?) il browser sta dicendo al server che non vuole usare la connessione persistente, ma vuole che il server chiuda la connessione dopo la spedizione dell’oggetto. Linea di intestazione User-agent specifica l’agente dell’utente, che è il tipo di browser che sta facendo la richiesta al server. Linea di intestazione Accept-language indica la lingua in cui l’utente preferisce ricevere l’oggetto.
+Dopo la linea di dell’intestazione c’è un corpo di entità (entity body), che è usato con il metodo POST. Il client HTTP usa il metodo quando l’utente compila un form (modulo): per esempio quando l’utente ricerca una parola su un motore di ricerca.
+Ma una richiesta generica con un form non usa necessariamente il metodo POST, si può usare il metodo GET e trasferire i dati inseriti nell’URL effetivo.
+Si prò usare anche il metodo HEAD, che è simile al metodo GET. Quando un server riceve una richiesta con metodo HEAD, risconde con un messaggio HTTP ma lascia fuori l’oggetto richiesto (metodo usato per debugging).
+
+Messaggio di risposta: questo messaggio può essere la risposta a la richiesta precedente. È suddiviso in tre parti.
+1. Linea di stato (status line) ha tre campi: il campo versione del protocollo, un codice di stato e un corrispondente messaggio di stato.
+2. Linee di intestazione (header line) che è composta da più parti.
+- Il server usa la linea di intestazione Connection: close per avvisare il client che chiuderà la connessione TCP al termine della spedizione del messaggio.
+- Date: indica l’ora e la data in cui è stata creata la risposta HTTP.
+- Server: indica il browser web che ha generato il messaggio. Analogo a User-agent.
+- Last-Modified: indica l’ora e la data del momeento di creazione o dell’ultima modifica dell’oggetto.
+- Content-Length: indica numero di byte dell’oggetto da spedire.
+- Content-Type: indica che l’oggetto nel corpo dell’entità è testo HTML
+3. Corpo dell’entità (entity body) è il nucleo del messaggio e continene l’oggetto richiesto, rappresentato da (dati, dati, dati . . .).
+Formato generale del messaggio che è analogo a quello già visto.
+
+Codici di stato e le loro frasi:
+    • 200 OK : la richiesta è stata soddisfatta e le info sono tonrate come risposta;
+    • 301 Moved Permanently : oggetto spostato;
+    • 400 Bad Request : il server con capisce la richiesta;
+    • 404 Not Found : documento richiesto non esiste su questo sever;
+    • 505 HTTP Version Not Supported : la versione di protocollo HTTP non è suppotata dal server.
+
+
+
+
+2.2.4 	INTESTAZIONE USER-SERVER: AUTORIZZAZIONE E COOKIE
+Il server HTTP è privo di stato (stateless) cioè è un protocollo senza memoria. Quindi è preferibile che un sito Web possa identificare un utente, per questo motivo HTTP fornisce due meccanismi per aiutare il server a identificare gli utenti, cioè l’autorizzazione e i cookie.
+Autorizzazione: quando all’utente viene richiesto di fornire un usaername e una password per poter accedere ai documenti archiviati sul server. La richietsa e la ricezione dell’autorizzazione avviene spesso usando speciali intenstazioni e codici di stato HTTP.
+{Esempio-> C: messaggio di richiesta HTTP
+S: risponde con un corpo dell’entità vuoto e con un codice di stato 401 Authorization Required e include l’intestazione WWW-             Authenticate:, che specifica i dettagli su come eseguire l’autneticazione.
+C (browser): riceve messaggio e suggerisce all’untente di inserire username e pass. Rispedisce il messaggio di richietsa e questa volta include una linea di intestazione Authorization:, che commprende username e pass.
+S: invia oggetto richiesto }
+Cookie: sono un meccanismo alternativo che i siti possono usare per tenere traccia degli utenti. Quetsa tecnologia ha quattro componenti:
+1. una linea cookie dell’header nel messaggio di risposta HTTP;
+2. una linea cookie dell’header nel messaggio di richiesta HTTP;
+3. un file cookie situato nel terminale dell’utente e gestito dal browser dell’utente;
+4. un database di back-end (interno, non visibile all’utente) nel sito Web;
+I siti e-commers possono usare i cookie per fornire un servizio di carrello per gli acquisti. I cookie possono quindi trasportare:
+- autorizzazioni per identificare l’utente;
+- carrello;
+- raccomandazioni/suggerimenti;
+- simula la sessine di uno stato;
+- modo per mantenere lo stato trasportandolo tra client/server senza mantenerlo sul server Web, che non ha stato.
+
+2.2.5	GET CONDIZIONATO
+Server proxy: è un server che si interpone nel normale flusso di comunicazione tra i client e i server dei servizi Web. In questo modo le richieste del tuo sistema arrivano al server proxy e da qui vengono rinviate al servizio richiesto, pertantoviene eliminato il collegamento diretto tra il client e il server di destinazione.
+Le funzioni principali sono:
+- Fornire l’anonimato durante la navigazione web (nasonde indirizzo IP);
+- Memorizzare una copia locale degli elementi web per non dover accedere nuovamente al server di destinazione;
+- Funzionare da firewall, agendo come filtro per il traffico in entrata e in uscita.
+La maggior parte dei server proxy per utilizzo privato funzionano con i protocolli HTTP, HTTPS e FTP.
+
+-> Attraverso la memorizzazione degli oggetti trovati in precedenza, il Web caching può ridurre il ritardo di ricerca dei documenti e diminuire la quantità di traffico Web inviato su Internt. La cache del Web possono risiedere nel client o nel server cache intermedio della rete. Qui parleremo di quello del client.
+Abbaiamo un problema -> una copia di un oggetto residente nella cache può invecchiare. Il GET condizionato (conditional GET) è un meccanimo dell’HTTP che permette al client di impiegare il caching pur assicurando che tutti gli oggetti passati al brwser sono aggiornati. Un messaggio di richiesta HTTP è detto GET condizionato quando usa il metodo GET & comprende una linea di intestazione If-Modified-Sincei:.
+
+2.3	TRASFERIMENTO DI FILE : FTP
+L’utente con il suo host locale vuole trasferire file a/o da un host remoto. Così l’utente fa l’autorizzazione, e poi può procedere al traferire file dal file system locale al file system remoto e viceversa.
+Passi :	- utente interagisce con l’FTP attraverso un agente dell’utente per l’FTP;
+	- utente fornisce il nome dell’host remoto, per stabilire una connessione TCP;
+	- identificazione dell’utente;
+	- quando server autorizza l’utente, l’utente copia uno o più file immagazzinati nel sistema di file locale da quello remoto;
+HTTP e FTP sono entrambi protocolli, dello strato di applicazione, per il trasferimento dei file. Anche FTP usa una connessione TCP, ma ne usa due in parallelo, una connessione di controllo (control connection) e una connessione dati (data connection). La prima è usata per spedire le info di controllo tra i due host, la seconda è quella che invia un file. Dato che FTP usa connessione di controllo seprata, si dice che l’FTP invia le sue info di controllo fuori dalla banda (out-of-band).
+
+2.4	POSTA ELETTRONICA
+È un mezzo di comunicazione asincrono, cioè l’utente manda e riceve messaggi quando gli fa comodo, senza doversi coordinare con gli orari delle altre persone. Componenti chiave sono gli agenti dell’utente (user agent), i server di posta (mail server) e SMTP (Simple Mail Transfer Protocol).
+Agenti dell’utente (Outlook, Miscosoft . . .) -> permettono agli utenti di leggere, rispondere, inoltrare, salvare e comporre messaggi. Si occupa di inviare il messaggio dell’utente A al server di posta, dove vine accodato alla file di messaggi in uscita. Qundo l’utente B vorrà leggere il messaggio, il suo agente dell’utente rintracci il messaggio dalla sua casella di posta nel suo server di posta.
+Server di posta -> formanoil nucleo dell’infrastruttura per l’email. Ogni desinatario ha una mailbox (casella di posta) situata in uno dei server di posta.
+Un tipico viaggio comincia il suo viaggio nell’agente dell’utente del mittente, arriva al server di posta del mittente e quindi viaggia fino al servre di posta del destinatario, dove viene depositato nella casella di psota. Se il server del mittente non può inviare la posta al servere di destinatario, allora mantiene in una coda (message queue) e proverà a inviarlo più tardi (cirda 30 min).
+SMTP -> è il protocollo principale dello strato di applicazione per la posta elettronica. Esso usa il servizio di trasferimento dati affidabile del TCP per trasferire la posta dal server di posta del mittente al quello del destinatario. Ha due lati: il lato client, che gira sul server di posta del mittente, e un lato server, che gira sul server di posta del destinatario.
+Protocollo molto vecchio che restringe il corpo dei messaggi per portarli alla semplice forma ASCII a sette bit, il che richiede la decodifica in binario dopo il trasporto sull’SMTP. Questo aveva senso negli anni ’80, ma oggi nell’era multimediale la restirizone è dolorosa dato che dobbiamo fare la decodifica.
+
+Illustriamo le operazioni base dell’SMTP:
+1. A chiama il suo agente dell’utente per le e-mail, fornisce l’indirizzo e-mail di B, compone il messaggio e incarica il suo agente dell’utente di inviarlo;
+	2. L’agente dell’utente di A spedisce il messaggio al suo server di posta, dove il messaggio viene accodato ai precedenti;
+	3. Il lato client dell’SMTP, che funziona sul server di posta di A, vede il messaggio nella coda dei messaggi. Apre una connessione TCPa un server SMTP, che funziona sul server di posta di B;
+	4. Dopo alcune iniziali handshake(strette di mano) degli SMTP, l’SMTP client invia il messaggio di A nella connessione TCP;
+	5. All’host del server di posta di B, il lato server dell’SMTP riceve il messaggio e il lato server di posta di B lo sistema nella casella di posta;
+	6. Quando gli è più comodo B chiede al suo agente dell’utente di leggere il messaggio.
+
+SMTP non usa server di posta intermedi per spedire la posta, anche quando i due server di posta coinvolti si trovano ai lati opposti del globo. Vediamo come SMTP trasferisce un messaggio da un server di posta mittente a uno destinatario. Il client SMTP (che funziona sul server di posta dell’host mittente) fa instaurare al TCP una connessione sulla porta 25 al server SMTP (che funziona sul server di posta dell’host destinatario). Se server è fuori uso, il client riproverà dopo. Stabilita la connessione, il server e il client eseguono alcuni handshake sullo stato applicazione. Durante questa fase l’SMTP client indica l’indirizzo e-mail del mittente e l’indirizzo e-mail del destinatario. Quando gli SMTP client e server di sono presentati, il client spedisce il messaggio. Una volta che il client invia tutti i messaggi che desidera dà istruzioni al TCP perchè chiuda a connessione.
+SMTP usa la connessione persistente.
+
+2.4.2.	CONFRONTO SMTP vs HTTP
+Entrambi i protocolli sono usati per trasferire dile da un host a un altro. HTTP trasferisce file (oggetti) da un Web server a un Web client; STMP trasferisce file (messaggi e-mail) da un server di posta a un altro. Entrmabi usano la connessione persistente. Ma ci sono anche delle differenze:
+	1. L’HTTP è un protocollo pull (tira o estrai): qualcuno carica informazioni sul server Web e gli utenti usano l’HTTP per estrarre informazioni dal server a loro piacere. La connessione TCP è inziata dalla macchina che vuole riceve i file.
+	    L’SMTP è un protocollo push (spingi): il server di posta che spedisce spinge i file verso quello destinatario. La connessione TCP è iniziata dalla macchina che vuole spedire il file.
+	2. SMTP vuole il messaggio in ASCII a sette bit.
+	    HTTP non ha questa restrizione.
+	3. l’HTTP incapsula ciscun oggetto nel proprio messaggio di risposta
+Infine affinchè B, che ha l’agente dell’utentefunzionante sul suo PC locale, ottenga il suo messaggio che è sistemato sul server di posta interno al suo ISP, dove l’agente dell’utente di B non può usare SMTP per recuperare i messaggi, perché recuperare i messaggi è un operazione di pull, mente SMTP è un protocollo di push. Utilizziamo allora un protocollo speciale di accesso ala posta che trasferisce i messaggi dal server di posta di B al suo PC locale. Questi protocolli di accesso sono: POP3 (Post Office Protocol), IMAP (Internet Mail Access Protocol) e HTTP.
+POP3
+È un protocollo di accesso semplice. Il POP3 esordisce quando l’agente dell’utente (client) apre una connessione TCP al serve di posta (server) sulla porta 110. Con la connessione TCP in atto, il POP3 procede attraverso tre fasi: autorizzazione, transazione e aggiornamento.
+Durante una sessione POP3 fra agente dell’utente e il server di posta, il server POP3 mantiene alcune informazioni di stato; in particolare, tiene traccia dei messaggi contrassegnati per l’eliminazione. Ma non tiene traccia dello stato tra le sessioni (questo è il motivo per cui implementare un server POP3 è più semplice).
+IMAP
+Offre più possibilità all’utente ma è più complesso. Un server IMAP assocerà ogni messaggio a una martella; appena un messaggio arriva al server, esso viene associato alla cartella INBOX del destinatario. Il destinatario può quindi spostare il messagio in una nuova cartella creata dall’utente, leggerlo, cancellarlo e così via. Un’altra differenza con il POP3 e che l’IMAP conserva l’informazione sullo stato dell’utente attraverso le sessioni IMAP. Esistono anche comandi che permettono a un agente dell’utente di ottenere componenti dei messaggi.
+Posta elettronica basta sul Web
+È quella più usata oggi. Con questo servizio l’agente dell’utente è un normale browser Web e l’utente comunica con la sua casella postale remota attraverso HTTP. Quando un destinatario B, vuole accedere a un messaggio nella sua casella si posta, il messaggio di posta viene mandato dal server di posta di B al browser di B usando il protocollo HTTP invece che POP3 o IMAP. Quando un mittente come A, vuole inviare un messaggio di posta elettronica, il messagio di posta viene inviato dal suo browser web al suo server di posta HTTP invece che su SMTP. Il server di posta di A, continua a inviare messaggi a, e ricevere da, altri server di posta usando SMTP. Come con IMAP gli utenti possono organizzare i loro messaggi in una gerarchia di cartelle sul server remoto.
+
+2.5	DNS: IL SERVIZIO DIRECTORY DI INTERNET
+Gli host di Internet possono essere identificati tramite:
+L’hostname (nome dell’host): gli hostname danno poca, se non nessuna, informazione della dislocazione dell’host all’interno di Internet e dato che sono costituiti da caratteri alfanumerici sono difficili da elaborare per i router. Per questo gli host sono identificati dal indirizzo IP (IP address).
+Indirizzo IP: consite in quattro byte. È simile a 121.7.106.83, dove ciscun punto separa uno dei byte espresso in notazione decimale da 0 a 255. È gerarchico, perché quando lo leggiamo da sx a dx otteniamo molte informazioni specifiche sulla collocazione dell’host in Internet (cioè in quale rete, all’interno della rete di reti).
+
+2.5.2	SERVIZI FORNITI DAL DNS
+L’identificazione attraverso un hostname è preferibile dall’utente, mentre quella attraverso l’indirizzo IP è preferibile dal router. Per conciliare queste preferenze, abbiamo bisogno di un servizio che tratti archivi di nomi per convertire gli hostname in indirizzi IP.
+DNS (Domain Name System): ha il compito ptincipale di convertire gli hostname in indirizzi IP. Il DNS è:
+	1. Un database distribuito implementato in una gerarchia di server dei nomi;
+	2. Un protocollo dello strato di applicazione che permette agli host di comunicare con i server dei nomi in modo da fornire il servizo di traduzione. I server dei nomi sono spesso macchine Unix.
+Il protocollo DNS gira su UDP e usa la porta 53.
+Questo protocollo è impeigato da altri protocolli dello strato di applicazione (compresi HTTP, SMTP e FTP) per tradurre i nomi degli host forniti dagli utenti in indirizzi IP.
+Esempio  (foto)
+Il DNS fonisce altri servizi:
+- Aslias degli hostname: un host con un hostname complicato può avere uno o più alias del nome.
+- Alias dei server di posta: è molto conveniete che gli indirizzi di posta siano mnemonici e quindi più facili da ricordare.
+- Distribuzione del carico: fra le repliche di un server, come i server Web replicati. Questo succede per i siti affollati che hanno diverse repliche su diversi server, con ciascun server che funziona su terminali differenti, con differnti indirizzi IP. Per le repliche dei server Web, a ciascun hostname canonico è associato un gruppo di indirizzi IP e il database del DNS contiene questo gruppo di indirizzi IP. Quando i client fanno una richiesta al DNS di un indirizzo inserito in questo gruppo, il server risponde con l’intero gruppo di indirizzi IP.
+
+2.5.2	COME FUNZIONA IL DNS
+Supponiamo che un applicazione (browser Web o lettore di posta) che gira sull’host di un utente abbia bisogno di tradurre un hostname in un indirizzo IP. L’applicazione richiamerà il lato client del DNS, specificando l’hostname che deve essere tradotto. Quindi subentra il DNS nell’host dell’utente, mandando un messaggio di richiesta nella rete. Dopo un ritardo (millisecondi – decine di secondi) il DNS nell’host dell’utente riceve un messaggio di risposta DNS che fornisce la corrispondenza desiderata e questa corrispondenza viene passata all’applicazione che l’ha richiesta.
+ un semplice progetto del DNS dovrebbe prevedere un server dei nomi in Internet che contine tutte le correlazioni. Ma un progetto di questo tipo comporta numerose problematiche:
+	-un punto singolo di guasto, se il server dei nomi si guasta salta tutto Internet;
+	-volume del traffico, un solo server dei nomi avrebbe da gestire tutte le richieste DNS;
+	-database centralizzato distante, un singolo server dei nomi non potrebbe essere “vicino” a tutti i client richiedenti;
+	-manutenzione, il server dei nomi singolo dovrà tenere la registrazione di tutti gli host di Internet. Questo database centralizzato non solo sarebbe gigantesco, ma dovrebbe essere aggiornato spesso per la registrazione di ciascun nuovo host.
+Un database centralizzato in un singolo server dei nomi non è scalabile. Di consegeunza il progetto DNS prevede la distribuzione.
+	-usa un gran numero di server dei nomi, organizzato in modo gerarchico e distribuiti in tutto il mondo;
+	-le correlazioni sono distribuite attravero tutti i server dei nomi;
+	-ci sono tre tipi di server dei nomi: server dei nomi locali, server dei nomi radice e server dei nomi assoluto. Questi server dei nomi interagiscono tra loro e con gli host richiedenti.
+Server dei nomi locali (local name server): ciascun ISP ha un server dei nomi locale (o server dei nomi di default). Quando un host invia un messaggio di richiesta, il messaggio viene prima inviato al server dei nomi locali. L’indirizzo IP del server dei nomi locale tipicamente è inserito a mano in un host. Il server dei nomi locali di solito è “vicino” al client. Se un host richede la traduzione per un altro host che è parte dello stesso ISP locale, allora il server dei nomi può fornire immediatamente l’indirizzo IP.
+Server dei nomi radice (root name server): quandoun server dei nomi locali non può soddisfare la richiesta di un host, il server dei nomi locali si comporta come un client DNS e invia una richiesta a un server dei nomi radice. Se il server dei nomi radice ha la redistrazione dell’hostname, invia un messaggio di risposta DNS al server dei nomi locale, che a sua volta invia una risposta DNS all’host richiedente. Ma il server dei nomi radice può no avere la registrazione dell’hostname, ma può invece conoscere l’indirizzo IP di un “server dei nomi assoluto” che ha la correlazione di quel particolare hostname.
+Server dei nomi assoluti (authoritative name server): ciascun host è registrato con un server dei nomi assoluto. Questo serve per un host ha sempre un record DNS che traduce l’hostname dell’host per l’indirizzo IP di quell’host.
+Ricistste ricorsive = quando un host o un server dei nomi A fa una richiesta ricorsiva a un server dei nomi B, allora il server dei nomi B ottiene la correlazione richiesta a nome di A e quindi la invia ad A.
+Richiesta iterativa = quando un server dei nomi A fa una richiesta iterativa al server dei nomi B, se questo non ha la correlazione richiesta, esso invia immediatamente una risposta DNS ad A che indica l’indirizzo IP del server successivo nella catena, cioè del server dei nomi C. Il server dei nomi A invia allora una richiesta al servizio dei nomi C.
+Nella catena delle richieste necessarie a tradurre un hostname, alcune delle richieste possono essere iterative e altre ricorsive.
+Caching del DNS: utilizzato per migliorare le performance rispetto al ritardo e per ridurre il numero di messaggi DNS nella rete.
+
+2.5.3	RECORD DNS
+Record di risore (RR, Resource Rercord) contiene le correlazioni fra gli hostname e gli indirizzi IP. Ciascun messaggio di risposta DNS porta con sé uno o più RR. Un record di risorsa è un quartetto che contiene i campi: (Name, Value, Type, TTL)
+- TTL è il tempo di vita del record di risorsa e determina il momento in cui una risorsa dovrà essere rimossa dalla cache.
+- Type = A (ad esempio)  è il tipo del record
+- Name è un hostname
+- Value è indirizzo IP
+
+2.5.4	MESSAGGI DNS
+Sono di due tipo, messaggi di richiesta e di risposta. Hanno lo stesso formato. La semantica dei vari campi è la seguente:
+    • Primi 12 byte sono la sezione dell’intestazione (header section), che ha diversi campi. Primo campo è di 16 bit e identifica la richiesta. Il campo delle etichette (flag), un flag richiesta/risposta a un bit indica se il messaggio è una richiesta(0) o una risposta(1).
+    • La sezione domanda (question section) contiene informazioni sulla richista fatta. Questa sezioni contiene un campo nome (con il nome richiesto) e un tipo campo (indica il tipo di richiesta relativa al nome).
+    • La sezione risposta (answer section) contiene record di risorsa per il nome richiesto.
+    • La sezione assoluta (authority section) contiene record di altri server assoluti.
+    • La sezione aggiuntiva (additional section) contiene altri record “utili”.
+
+
+2.9	DISTRIBUZIONE DI CONTENUTI – IL PROF LO HA ESCLUSO
+Il Web è ricco di contenuti, il che include pagine Web, dile musica MP3 ecc. questi contenuti sono sparsi tra i server di tutto il mondo. HTTP fornisce un mezzo a un qualunque dato utente per scaricare un qualunque dato oggetto di contenuto. Sebbene ogni utente possa scaricare qualunque oggetto, il tempo richesto di accesso può essere lungo per varie ragioni:
+- il percorso lungo il quale viaggia contiene un link a bassa velocità (il collo di bottiglia), il ritardo L/R (L=dim oggetto, R=ritmo trasmissione);
+- il percorso contiene almeno un link congestionato;
+- il server Web che contiene l’oggetto è sovraccarico di richieste per quell’oggetto.
+Soluzione  per ridurre il verificarsi di questi lunghi ritadi una stategia è di replicare il contenuto di uno o più server nella rete, e di dirigere la richiesta di un utente verso il server, che fornisce il più breve tempo di risposta, che ne contiene una copia (vicinanza fisica).
+Distribuzione di contenuti: si riferisce ai meccanismi (1) di replicare un contenuto su una molteplicità di server in Internet e (2) fornire ai terminali richiedenti un mezzo per determinare i server che possono fornire il contenuto più velocemente.
+Tre grandi categorie per la distribuzione dei contenuti:
+	- Web caching (detta anche proxy server) è un’entità della rete che soddisfa le richieste HTTP attraverso un server di origine. La cache del Web ha un proprio disco di archiviazione e conserva nella sua memoria copie degli oggetti richiesti di recente. Per esempio, supponiamo che il browser stia chiedendo l’oggetto http://www.someschool.edu/campus.gif: (1)il borwser stabilisce una connessione TCP con la cache del Web e invia una richiesta HTTP dell’oggetto alla cache del Web, (2)la cache del Web controlla se ha una copia memorizzata localmente. Se c’è la cache inoltra l’oggetto all’interno del messaggio di risposta HTTP al browser del client, (3)se la cache Web non ha l’oggetto, apre una connessione TCP al server di origine, cioè www.someschool.edu, e invia una richiesta HTTP dell’oggetto nella connessione TCP. Adesso il server di origine invia l’oggetto nella risposta HTTP alla cache Web, (4)quando la cache del Web riceve l’oggetto, ne archivia una copia nella memoria locale e ne invia una copia, tramite riposta HTTP, al browser del client.
+Da notare che la cache Web è contemporaneamente un server (riceve/manda richieste/risposte da/a un browser) e un client (manda/riceve richieste/risposte a/da un server di origine).
+	- Reti per la distribuioni di contenuti (CDN, Content Distribution Networks)
+	- Condiviosione di file da pari a pari (peer-to-peer, P2P) i PC all’accesso della rete (chiamati pari = peer) possono scaricare oggetti direttamente l’uno dall’altro. È un paradigma di condivisione dove tutti i contenuti vengono trasferiti direttamente tra normali pari, senza passare attraverso server di terza parte. Quindi il P2P sfrutta le risorse (banda, memoria e CPU) di una molteplicità di pari per distribuire i contenuti. Nonostante non partecipi alcun server è importante ricordare che la condivisione di file P2P usa comunque il paradigma client-server, dove il pari richiedente è il client e il pari scelto è il server. Dal momento che qualunque pari può essere scelto, tutti i pari devono essere in grado di azionare sia il lato client che quello server e un pari è sia un clinet Web sia un server Web temporaneo (server Web  fornisce contenuti all’interno di risposte HTTP & temporaneo  è connesso a Internet in modo intermittente, e può avere un nuovo indirizzo IP ogni volta che viene connesso a Internet). Come un pari determina quali pari hanno il contenuto richiesto? Se il pari Per è interessato a ottenere un particolare oggetto, allora il pari Per deve avere un modo di determinare gli indirizzi IP dei pari connessiche ne hanno una copia. Esistono 3 architetture per localizzare i contenuti: 1. Directory centralizzata, in questa architettura il servizio di condivisione di file P2P usa un grande server per fornire il servizio di directory. Quando un utente lancia l’applicazione di condivisione di file P2P, l’applicazione contatta il server directory e lo informa dell’indirizzo IP e dei nomi degli oggetti contenuti nel suo disco locale che rende disponibili per la condivisione. Così il server directory sa quali oggetti il pari ha a disposizione per la condivisione. Il server raccoglie queste informazioni da ogni pari che di attiva, creando così un dabase centralizzato, dinamico che mette in corrispondenza ogni nome di oggetto con una serie di indirizzi IP. Qaundo avviene una rimozione il pari informa il server così che il database venga aggiornato. Un modo per tenere traccia dei pari connessi è di mandare periodicamente dei messaggi ai pari per vedre se rispondono oppure di mantenere una connessione TCP permanente con ogni pari connesso e quando la connessione termina il pari è disconnesso. Qaudno il pari è disconnesso il server rimuove l’indirizzo IP del pari dal database. Svantaggi: unico punto di rottura, collo di rottura delle prestazioni, violazione del copyright e l’app è parzialmente decentralizzata (trasferimento file  decentrlizzato, processo localizzazione contenuto  centralizzato). 2. Directory decentralizzata, distribuire la directory per la localizzazione del contenuto tra i pari stessi. Un certo numero di pari sono nominati capogruppo. Qunado un pari si connettte all’app P2P esso viene assegnato a uno dei capigruppo e dopo aver conosciuto l’indirisso IP del suo capogruppo, il pari contatta il suo capo e lo informa dei contenuti che si appresta a condividere. Il capogruppo mantiene il database e mette in corrispondenza dei nomi dei contenuti gli indirizzi IP, per tutti i pari assegnati al suo gruppo. In questo modo ogni gruppo diventa un minisistema di condivisione di file P2P. Un capogruppo non è un server dedicato, ma è un pari.
+I pari e le loro relazioni di comunicazione formano una rete logica stratta detta rete sovrapposta (overlay network). I rami non sono link fisici di comunicazione, ma piuttosto link virtuali tra pari. Il sistema di condivisione file P2P deve avere uno o più nodi di bootstrap (avviamento) per quando un pari vuole aggregarsi alla rete, prima contatta il nodo di bootstrap, così il nodo risponde con l’indirizzo IP di uno dei capigruppo e così il pari crea un ramo verso quel capogruppo. Inoltre, quando il pari si collega inzialmente con un nodo bootstrap, quest’ultimo può designare il pari come nuovo capogruppo, invece che come altro pari. I nodi di bootstrap sono server sempre accesi così i pari possono utilizzare ill DNS per localizzarli. Vataggi :database distribuito e di piccole dimensioni. Ma i capigruppo possono divetare colli di bottiglia, perchè hanno maggiori responsabilità. 3. Inondazione di richieste (query flooding), tutti i pari sono uguali, non esiste una struttura gerarchica con capigruppo. Un pari si aggrega alla rete contattando un noto di bootstrap, che comunica al pari l’indirizzo IP di uno o più pari facenti parte della rete sovraesposta. Ogni parte della rete sovrapposta ha conoscenza solo dei pari vicini, cioè i pari con cui ha rami comunicanti nella rete. Per la localizzazione degli oggetti viene usato un’inondazione di richieste a tutti i pari vicini al richiedente. Se un pari possiede l’oggetto desiderato, manda indietro una risposta al pari che ha originato la richiesta, indicando che possiede una copia. Vataggi: tutti i pari hanno responsabilità simili, nessun pari memorizza informazioni di directory (l’assenza di database semplifica enormemente la progettazione). Svataggi: ogni volta viene immessa nella rete una grande quantità di traffico di richieste (in risposta è stato introdotto un limite al raggio di propagazione delle richieste).
+Poiché queste applicazioni si poggiano tutte in cima agli esistenti quattro strati della pila protocollare di Internet, esse richiedono solo lo sviluppo di nuovo software client-server da utilizzare nei terminali.
+
+CAPITOLO 3
+Strato di trasporto: collocato tra quello applicativo e quello di rete.
+3.1	INTRODUZIONE E SERVIZI
+Un protocollo dello strato di trasporto fornisce una comunicazione logica (come se i terminali fossero direttamente connessi) fra i processi applicativi che funzionano tra host differenti. I protocolli dello strato di trasporto sono implementati nei terminali ma non nei router della rete.
+3.1.1	RELAZIONE FRA GLI STRATI DI TRASPORTO E DI RETE
+Nella pila protocollare lo strato di trasporto è situato proprio sopra quello di rete. Strato di trasporto  fornisce una comunicazione tra i processi che funzionano su differenti host; Strato di rete   fornisce la comunicazione logica fra gli host.
+Esempio: nell’esempio della posta, il servizio postale fornisce una comunicazione logica tra le due case, infatti esso si muovo da casa a casa, non da persona a persona. Mentre le persone che hanno raccolto le lettere per portarle alla posta hanno fornito una comunicazione logica tra i cugini. Qundi hanno comunque fornito una comunicazione logica anche se tra tra parti diverse.
+Quindi in modo simile il protocollo dello strato di trasporto “vive” nei terminali. All’interno di un terminale, un protocollo di trasporto si muove i messaggi dal processo dello strato di applicazione all’estremità della rete e viceversa; ma esso non ha voce in capitolo su come i messaggi sono spostati nelle sezione interna della rete. Infatti come si vede nella Figura 3.1, i router intermedi ne agiscono su, né riconoscono, qualsiasi informazione che lo strato di trasporto può aver aggangiato ai messaggi dell’applicazione. Il protocollo di trasporto può offrire certi servizi anche se il sottostante protocollo di rete non offre i corrispondenti servizi allo strato di rete. Per esempio, un protocollo di trasporto può offrire a un’applicazione un servizio di affidabile trasferimento dei dati anche quando il sottostante protocollo di rete è inaffidabile, cioè quando perde, altera e suplica i pacchetti. Un protocollo di trasporto può usare la cifratura per garantire che i messaggi dell’applicazione non siano letti da intrusi.
+3.1.2	PANORAMICA DELLO STRATO DI TRASPORTO
+Internet rende dirponibili due protocolli dello strato di trasporto allo strato di applicazione.
+-La maggior responsabilità di UDP e TCP è di estendere il servizio di spedizione di IP fra due terminali al servizio di spedizione fra due processi che funzionano sui terminali. Questa estensione della sedizione da host a host alla spedizione da processo a processo è detta multiplexing e demultiplexing dello stato di trasporto.
+-UDP e TCP forniscono controllo dell’integrità inserendo campi di rilevamento di errori.
+(chi programma un’applicazione sceglie tra UDP e TCP quando crea i socket)
+	- UDP (User Datagram Protocol): fornisce alle applicazioni un servizio inaffidabile (non garantisce che dati spediti da un processo arriveranno intatti al processo destinazione), senza connessione.
+Servizi: 1. Spedizione di dati da processo a processo; 2. Verifica degli errori; 3. Traffico non regolabile.
+	- TCP (Transmission Control Protocol): fornisce alle applicazioni un servizio affidabile orientato alla connnessione. Protocollo più complesso.
+	Servizi: 1. Trasferimento affidabile dei dati, usando controllo flusso, numeri di sequenza, riscontri e timer; 2. Assicura che i dati spediti arriveranno al destinatario e arriveranno in ordine (affidabile); 3. Controllo di congestione che previene la saturazione attraverso la suddivisione equa della banda di un link congestionato tra le connessioni TCP che lo attraversano.
+
+{(PDU protocol data unit) Ci riferiremo alla 4-PDU come segmento e si riferisce alla PDU per TCP come un segmento e alla PDU per UDP come a un datagram. Ma per screare meno confuzione ci si riferirà alla PDU sia di TCP sia di UDP come segmenti.}
+
+IP (Internet Protocol): è il protocollo dello strato di rete di Internet e fornisce la comunicazionelogica fra gli host. È un modello di servizio best effort e questo significa che che IP fa del suo meglio per consegnare i segmenti tra i due host in comunicazione, ma non dà garanzie (su consegna, ordine e integrità dei dati nei segmenti). servizio inaffidabile.
+Ogni host ha un unico indirizzo IP!
+3.2	MULTIPLEXING E DEMULTIPLEXING
+All’host destinatario, lo strato di trasporto riceve i segmenti dallo strato di rete posto subito sotto di esso. Sul calcolatore sono aperti tanti processi applicativi di rete funzionanti e quando lo strato di trasporto riceve dati dal protocollo di rete sottostante, esso ha la necessità di dirigere i dati ricevuti a uno di questi processi aperti.
+Ricordiamo che un processo ha una socket, che è una porta attraversi la quale i dati passano dalla rete al processo, e viceversa. Quindi lo strato di trasporto nel terminale ricevente non consegna effettivamente i dati direttamente a un processo, ma li consegna a un socket intermedio. E dato che in ogni istante ci può essere più di un socket nel terminale ricevente, ogni socket ha un identificatore unico e il formato dipende da se il socket è UDP o TCP.
+Parliamo di come un terminale ricevente dirige un segmento entrante dello strato di trasporto verso il socket giusto.
+Demultiplexing: Recapitare i dati in un segmento dello strato di trasporto al corretto socket. Ogni segmento ha un insieme di campi dedicati a questo scopo e lo stato di trasporto esamina questi campi per determinare il socket ricevente e indirizzargli il segmento.
+Multiplexing: ottenere i dati dall’host sorgente dai diversi socket, completare i dati con le info di intestazione per creare segmenti, e di passare i segmenti allo strato di rete.
+Lo strato di trasporto nell’host intermedio deve demultiplare i segmenti che arrivano dallo strato di rete sottostante per entrambi i processi sovrastanti P1 e P2; questo è fatto dirigendo i dati dei segmenti entranti verso il socket del corrispondente processo. Lo strato di trasporto nell’host intermedio deve anche raggruppare i dati uscenti da questi socket, formare segmenti e passarli in basso verso lo strato di rete.
+Multiplazione: richiede che i socket abbiano identificatori univoci e che ogni segmento abbia speciali campi che indicano il socket al quale il segmento deve essere consegnato. Questi campi sono il campo numero di porta sorgente e il campo numero di porta di destinazione. Ogni numero di porta è a 16 bit (e va da 0 a 65535).
+ Servizio di demultiplazione: a ogni socket nel terminale può essere assegnato un numero di porta e quando arriva un segmento lo strato di trasporto esamina il numero di destinazione e lo dirige verso il socket corrispondente. I dati del segmento passano attraverso il socket verso il processo di destinazione. (UDP funziona più o meno così, ma TCP è più raffinato).
+ Multiplazione e Demultiplazione senza connessione - UDP
+Quando viene creato un socket USP, lo strato di trasporto assegna automaticamente un numero di porta nel range da 1024 a 65535. Se invece si conosce il numero di porta del servizio gli si assegna quello.
+Supponiamo che un processo con il socket 12157 nel terminale A vuole mandare un blocco di dati di applicazione a un processo nel terminale B con socket UDP 46428. Lo strato di trasporto nel terminale A crea un segmento dello strato di trasporto che comprende i dati di applicazione, il numero di porta sorgente, il numero di porta destinazione e altri due valori. A questo punto lo strato di trasporto passa il segmento allo strato di rete. Lo strato di rete incapsula il segmento in un datagram IP e fa un tentativo best-effort di consegnare il segmento. Se il segmento arriva al terminale ricevente B, quest’ultimo esamina il numero di porta di destinazione e consegna il segmento al suo socket identificato dalla porta 46428. Ma bisogna tenere conto che sul terminale B potrebbero essere attivi molteplici processi, ciascuno con il suo socket UDP e il numero di posta associato. Man mano che i segmenti UDP arrivano dalla rete, il terminale B dirige (demultipla) ogni segmento verso il socket appropriato.
+Un socket UDP è univocamente determinato dalla coppia indirizzo IP e numero di porta di destinazione. Mentre il numero di porta sorgente serve a formare l’indirizzo di ritorno, quando B vuole mandare indietro un segmento ad A.
+Multiplazione e Demultiplazione con connessione – TCP
+Una differenza sta nel fatto che un socket TCP è identificato da una 4-upla: indirizzo IP di sorgente, numero di porta di sorgente, indirizzo IP destinazione, numero di porta destinazione. Quindi, quando un segmento TCP arriva dalla rete a un terminale, il terminale usa tutti e quattro i valori per dirigere (demultiplare) il segmento verso il giusto socket.
+- l’app server TCP ha un socket di benvenuto, che è in attesa di richieste di connessione sulla porta 6789;
+- il client TCP genera un segmento di richiesta di instaurazione di connessione;
+- una richiesta di instaurare una connessione non è altro che un segmento TCP con numero di porta di destinazione 6789 e uno speciale bit di instaurazione di connessione porto a 1 nell’intestazione TCP. Il segmento comprende anche un numero di porta sorgente, scelto dal client.
+- quando il server riceve il segmento entrante di richiesta di connessione da un client, esso informa il processo server, che crea una socket di connessione.
+- inoltre, il server si annota i seguenti quattro valori del segmento di richiesta. Il socket di connessione appena creato è identificato da questi valori e tutti i segmenti futuri con i quattro valori identici saranno indirizzati a questo socket. Una volta instaurata la connessione TCP, il client e il server possono scambiarsi dati reciprocamente.
+Il terminale server può supportare molti socket TCP contemporaneamente.
+
+Esempio: il terminale C inizia due sessioni HTTP con il server B, e il terminale A inizia una sessione HTTP con B. Ogni terminale ha un suo indirizzo IP unico. Il terminale C assegna due numeri di porta sorgente diversi (26145 e 7532) alle sue due connessioni HTTP. Poiché il terminale A sceglie i numeri di porta sorgente indipendentemente da C, potrebbe anch’esso assegnare un numero di porta sorgente pari a 26145 alla sua connessine. Comunque, il server B sarà comunque in grado di demultiplare correttamente le due connessioni aventi lo stesso numero di porta sorgente, dal momento che gli indirizzi IP sono diversi.
+
+3.3	UDP
+Lo strato di trasporto deve fornire un servizio Multiplexing/Demultiplexing per passare i dati fra lo stato di rete e il corretto processo. L’UDP prende i messaggi dal processo dell’applicazione, aggiunge i campi con i numeri di porta sorgente e destinazione per il servizio m/d, aggiunge altri piccoli campi e passa il segmento che ne risulta allo strato di rete. Lo strato di rete incapsula il segmento in un datagram IP e quindi tenta in modalità best effort di consegnare il segmento all’host di destinazione.
+- il DNS è un esempio di un protocollo dello strato di applicazione che usa l’UDP.
+Ci si potrebbe chiedere perché si usa UDP quando TCP fornisce un servizio affidabile a differenza dell’UDP. Ci sono alcuni motivi per cui UDP è preferibile per alcune applicazioni:
+	- non viene creata connessione, quindi non introduce alcun ritardo dovuto alla fase di importazione della connessione.
+	- nessuno stato della connessione, il TCP mantiene lo stato della connessione nei terminali e questo stato comprende i buffer di ricezione e spedizione, i parametri di controllo della congestione e quelli dei numeri di sequenza e di riscontro. Ma UDP non mantiene questo stato e per questo può supportare molti più client attivi.
+	- poco sovraccarico dovuto all’intestazione del pacchetto, il segmento UDP ha un sovraccarico (overhead) di intestazione di 8 byte.
+	- controllo di livello applicativo più fine su quali dati vengono mandati e quando, con UDP appena un processo applicativo manda dati a UDP, UDP li impacchetta all’interno di un segmento UDP e passa immediatamente il segmento allo strato di rete, senza alcun controllo di congestione che “strozzi” il mittente come in TCP.
+
+ 3.3.1	STRUTTURA DEL SEGMENTO UDP
+L’intestazione  ha quattro campi, ciascuno di 2 byte.
+Checksum (somma di controllo) è usata dall’host ricevente per controllare se sono stati introdotti errori nel segmento.
+Lunghezza  specifica la lunghezza del segmento, intestazione compresa, in byte.
+
+3.3.2	CHECKSUM
+Effettua il rilevamento degli errori e controlla se i bit nel segmento sono stati alterati nel percorso dalla sorgente alla destinazione.
+
+3.4	PRINCIPI DI UN TRASFERIMENTO AFFIDABILE
+Prima di parlare di TCP si parlerà di come avviene un trasferimento affidabile. Il problema del trasferimento affidabile dei dati ha un contesto più generale dato che è un problema che si presenta a livello dello strato di trasporto ma anche agli strati di collegamento e di applicazione.
+L’astrazione del servizio fornito all’entità dello strato superiore è quella di un canale affidabile attraverso cui si possono trasferire i dati, dove per affidabile si intende un canale dove dei bit di dati trasferiti non vengono alterati o perso, e tutti i dati sono recapitati nell’ordine di spedizione.
+Parleremo solo del caso di trasferimento unidirezionale dei dati, cioè il trasferimento dei dati dal lato che spedisce -> riceve.
+ Trasferimento affidabile dei dati è un protocollo che si occupa dell’implementazione di quest’astrazione del servizio. Ma il compito è reso difficile dal fatto che lo strato sottostante il protocollo di trasferimento affidabile dei dati può essere inaffidabile.
+
+3.4.1	COSTRUZIONE PROTOCOLLO PER IL TRASFERIMENTO AFFIDABILE
+Trasferimento affidabile dei dati su un canale completamente affidabile: rdt1.0
+Il canale sottostate è completamente affidabile. Il protocollo rdt1.0 è banale. E la macchina a stati finiti (FSM, finite-state machine) per il mittente (sender) e il destinatario (receiver) è la seguente. Le FSM per sender e receiver sono differenti. Eventi che causano transazione sono sopra la linea orizzontale, e le azioni intraprese quando l’evento accade sono illustrate sotto la linea orizzontale. Lo stato inziale è la linea tratteggiata.
+- Il lato sender dell’rdt accetta i dati dallo strato superiore, inserisce i dati in un pacchetto e spedisce il pacchetto nel canale.
+- Il lato receiver dell’rdt riceve un pacchetto dal canale sottostante, estrae i dati dal pacchetto e li passa sopra, allo strato superiore.
+In questo protocollo non c’è distinzione tra unità dati e pacchetto, e tutti il flusso dei pacchetti è dal sender al receiver perché con un canale affidabile non c’è la necessità per il receiver di fornire alcun feedback (risposta) al sender.
+Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.0
+È un modello più realistico del canale sottostante la trasmissione. Gli errori sui bit che possono verificarsi si verificano specie nei componenti fisici della rete quando un pacchetto è trasmesso, si propaga o è inserito nei buffer. Supponiamo (per il momento) che i pacchetti trasmessi siano ricevuti nell’odine in cui sono spediti.
+I protocolli per il trasferimento affidabile dei dati che si basa sulla ritrasmissione sono detti protocolli ARQ (Automatic Repeat reQuest).
+ nei ARQ ci sono tre funzionalità per gestire la presenza di errori sui bit:
+- Rilevamento degli errori, queste tecniche permettono al ricever di rilevare e possibilmente correggere degli errori nei bit dei pacchetti. Per farlo vengono inseriti dei bit extra nel campo checksum dei pacchetti dati di rdt2.0.
+	- Feedback dal ricevente, i riscontri positivi = ACK (positive acknowledgment) e quelli negativi = NAK (negative acknowledgment) che verranno inviati dal receiver al sender. Questi pacchetti richiedono la lunghezza di 1 bit.
+	- Ritrasmissione, un pacchetto che arriva con errori al receiver sarà ritrasmesso dal sender.
+- Il lato sender di rdt2.0 ha due stati. Nello stato a sinistra, il lato di spedizione del protocollo sta aspettando che i dati arrivino dallo strato superiore. Quando arriva il pacchetto il mittente crea il pacchetto che contiene i dati da inviare, insieme a una checksum del pacchetto e manda il pacchetto.
+Nello stato a destra, il protocollo sender sta aspettando un pacchetto ACK o NAK dal receiver. 1. Se riceve un ACK il sender sa che il pacchetto trasmesso più recente è stato ricevuto correttamente e allora il protocollo ritorna nello stato di attesa; 2. Se riceve un NAK, il protocollo ritrasmette l’ultimo pacchetto e aspetta che venga ritornato un ACK o un NAK dal receiver.
+!!! Importante: quando il sender è nello stato di attesa ACK o NAK non può accettare altri fati dallo strato superiore.  per questa caratteristica i protocolli come rdt2.0 sono detti protocolli stop-and-wait.
+- il lato receiver del rdt2.0 ha uno stato solo. All’arrivo del pacchetto replica con un ACK o un NAK, in funzione del fatto che il pacchetto ricevuto sia o no alterato.
+Ma che succede se anche gli ACK/NAK sono alterati? Ci sono due possibilità per gestire gli ACK/NAK difettosi:
+- aggiungere un numero di bit al checksum sufficiente al receiver di rilevare e correggere gli errori nei bit.
+- il sender rinvia i pacchetti quando riceve un pacchetto ACK o NAK difettoso. Questo metodo introduce duplicati dei pacchetti nel canale tra sender e receiver. Ma la difficoltà è che non sa se il pacchetto in arrivo contiene nuovi dati o se è una ritrasmissione. soluzione: inserire un nuovo campo al pacchetto e numerare i pacchetti con un numero di sequenza.
+Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.1
+Ha il doppio degli stati di prima. Perché lo stato del protocollo deve tenere conto se il pacchetto attualmente in fase di spedizione o di ricezione dovrà avere numero di sequenza di 0 o 1. Le azioni nei due stati sono speculari, la sola differenza si ha nella gestione dei numeri di sequenza.
+Usa riscontri sia positivi sia negativi dal receiver al sender. Quando riceve un pacchetto fuori sequenza oppure alterato, il receiver invia un riscontro negativo.
+Un sender che riceve due ACK per lo stesso pacchetto (cioè riceve duplicati dell’ACK) riconosce che i receiver non ha avuto nel modo corretto il pacchetto successivo a quello che è stato oggetto del duplicato dell’ACK.
+
+
+
+
+
+
+
+
+
+Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.2
+È il protocollo di trasferimento affidabile dei dati senza NAK per un canale con errori sui bit. La differenza con l’rdt2.1 è che il receiver deve ora includere il numero di sequenza del pacchetto che viene riscontrato da un messaggio ACK, e ciò è fatto inserendo l’argomento ACK,0 o ACK,1, e il sender deve ora controllare il numero di sequenza del pacchetto che viene riscontrato da un messaggio ACK ricevuto.
+
+
+
+
+Trasferimento affidabile dei dati su un canale con perdite e con errori sui bit: rdt3.0
+Abbiamo alterazione dei bit, il canale sottostante può perdere i pacchetti (evento non insolito nelle odierne reti di calcolatori). Abbiamo due nuove difficoltà: come rilevare la perdita dei pacchetti e cosa fare quando si perdono i pacchetti. L’uso di checksum, numeri di sequenza, pacchetti ACK e ritrasmissioni (tecniche di rdt2.2) ci permettono di risolvere l’ultima difficoltà (cioè cosa fare con la perdita di pacchetti). La gestione della prima (rilevare perdita) richiede l’aggiunta di un nuovo meccanismo.
+Supponiamo che il sender trasmetta un pacchetto di dati e che o il pacchetto o il riscontro ACK del receiver siano persi. Se il sender è disposto ad aspettare abbastanza a lungo per essere sicuro che il pacchetto è andato perso e può rispedirlo. Quindi il sender sceglie un valore del tempo tale che faccia supporre, anche se non lo garantisce, che il pacchetto si andato perso. Se entro questo tempo non è ricevuto un ACK il pacchetto viene ritrasmesso.
+- il lato sender non sa se un pacchetto dati o ACK è perso o se è semplicemente in ritardo, ma ritrasmette ugualmente. Si usa un meccanismo di conto alla rovescia (countdown timer) che possa interrompere il sender dopo che è trascorso un certo tempo. Il sender deve quindi (1) avviare il timer ogni volta che il pacchetto viene spedito, (2) rispondere alle interruzioni del timer, e (3) arrestare il timer. Dato che il possiamo essere anche in una situazione di pacchetti duplicati e per capire di che tipo di ACK si tratta (ack per la spedizione del pacchetto più recente o ack in ritardo spedito in risposta a una precedente trasmissione) viene inserito un campo di riscontro (acknowledgment field).
+(a) non c’è perdita o alterazione dei pacchetti;
+(b) modo in cui viene gestita la perdita dei pacchetti.
+(c)&(d) le parentesi sul lato che spedisce indicano i tempi di regolazione del timer e i successivi time-out (scadenze).
+ protocollo detto a bit alternati poiché i numeri di sequenza dei pacchetti si alternano tra 0 e 1.
+
+3.4.2	PROTOCOLLI PIPELINE PER IL TRASFERIMENTO AFFIDABILE DEI DATI
+Il protocollo rdt3.0 è funzionalmente corretto, ma le sue prestazioni non sono soddisfacenti, soprattutto perché è un protocollo stop-and-wait.
+Vale a dire che il sender è occupato solo 2,7 centesimi dell’1% del tempo. Ma d’altra parte il sender è in grado di spedire solo 1000 byte in 30,008 millisecondi, una capacità effettiva (throughput) di soli 267kbit/s, sebbene fosse disponibile un link con capacità di 1Gbit/s al sec. Questo è un esempio di come un protocollo di rete può limitare le potenzialità di un sottostante hardware di rete.
+
+
+
+
+
+Soluzione: piuttosto che operare in modo stop-and-wait, al sender si sente l’invio di più pacchetti senza che debba aspettare i riscontri. Al sender è permessa la trasmissione di tre pacchetti prima di dover aspettare un riscontro, così l’utilizzazione del sender è triplicata. Questa tecnica è chiamata pipeline.
+Ha molte conseguenze:
+- la gamma dei numeri di sequenza deve essere aumentata, poiché ciascun pacchetto in transito deve avere un numero di sequenza unico e perché ci possono essere più pacchetti non riscontrati in transito.
+- i lati sender e receiver possono memorizzare più pacchetti.
+Si possono indentificare due approcci per riparare agli errori: Go-Back-N (torna indietro a N) e ripetizione selettiva (selective repeat).
+
+3.4.3	GO-BACK-N (GBN)
+In questo protocollo il sender può trasmettere pacchetti multipli senza aspettare il riscontro, ma è costretto ad avere non più di un certo numero massimo consentito di pacchetti non riscontrati, N, nella pipeline. La gamma permessa dei numeri di sequenza per i pacchetti trasmessi ma non ancora riscontrati può essere considerata una “finestra” di dimensione N che si apre su una gamma di numeri di sequenza. Con il protocollo in funzione, questa finestra scorre in avanti sullo spazio dei numeri di sequenza. Per questo N = dimensione della finestra, e al protocollo GBN come protocollo finestra scorrevole.
+Nella FSM di un GBN basato su ACK, senza NAK.
+ Il sender deve affrontare:
+-chiamata da sopra, quando arriva una chiamata da sopra, il sender prima controlla per valutare se la finestra è satura, se non lo è viene creato e spedito un pacchetto e le variabili aggiornate nel modo appropriato. Se la finestra è satura, il sender ritorna i dati allo stato superiore.
+- ricezione di un ACK, nel caso del protocollo GBN, un riscontro per un pacchetto con numero di sequenza n sarà interpretato come un riscontro cumulativo, che indica che tutti i pacchetti con un numero fino a n, n compreso, sono stati correttamente ricevuti dal receiver.
+- evento timeout, come nei protocolli stop-and-wait, si userà un timer per recuperare i dati o i pacchetti di riscontro persi. Se c’è un timeout, il sender rispedisce tutti i pacchetti che sono già stati spediti ma che non hanno avuto riscontro.
+Se si riceve un ACK ma ci sono ancora pacchetti spediti ma non riscontrati: il timer è riavviato.
+Se non sono presenti pacchetti non riscontrati: il timer si arresta.
+ il receiver deve, se un pacchetto con un numero di sequenza n è ricevuto correttamente ed è in ordine, il receiver invia un ACK per il pacchetto n e invia la porzione di dati del pacchetto allo strato superiore. In tutti gli altri casi il receiver scarta il pacchetto e rispedisce un ACK per il pacchetto ricevuto più recente con l’ordine esatto. Il receiver scarta tutti i pacchetti non in ordine. Il vantaggio è la semplicità del buffering del receiver, perché non deve mantenere in memoria alcun pacchetto fuori ordine.
+
+3.3.4	RIPETIZIONE SELETTIVA (SR)
+Come suggerisce il nome, il protocollo a ripetizione selettiva evitano le ritrasmissioni non necessarie grazie alla ritrasmissione di quei soli pacchetti che si sospetti siano giunti con errori. Richiede che il receiver riscontri individualmente i pacchetti ricevuti nel modo corretto, e una finestra di dimensioni N dovrà ancora essere usata per limitare il numero di pacchetti da evadere, non riscontrati. A differenza del GBN il sender avrà già ricevuto gli ACK per alcuni dei pacchetti nella finestra. I pacchetti fuori ordine sono archiviati in memoria fino a che sono ricevuti tutti i pacchetti persi e a questo punto un gruppo di pacchetti può essere inviato in ordine allo stato superiore.
+
+- Eventi e azioni del sender:
+1. dati ricevuti da sopra, quando i dati arrivano da sopra, il sender SR controlla il numero di sequenza successivo disponibile per il pacchetto. Se il numero di sequenza è all’interno della finestra del sender, i dati sono impacchettati e spediti; altrimenti possono essere salvati o ritornati allo stato superiore.
+2. timeout, i timer sono ancora usati per prevenire la perdita di pacchetti. Ciascun pacchetto deve avere un proprio timer logico.
+3. ACK ricevuti, se riceve un ACK il sender contrassegna il pacchetto corrispondente come ricevuto, quando è nella finestra. Se la finestra scorre e trova pacchetti non trasmessi con numero di sequenza che ora rientra nella finestra, vengono trasmessi questi pacchetti.
+- Eventi e azioni del receiver:
+1. viene correttamente ricevuto un pacchetto con un numero di sequenza tra [base, base+N-1], viene ritornato al sender un pacchetto selettivo ACK. Se il pacchetto non era stato precedentemente ricevuto, esso viene salvato. Se questo pacchetto ha un numero di sequenza uguale alla base della finestra del receiver, allora il pacchetto e ogni suo precedente salvato precedente sono inviati allo strato superiore.
+2. viene ricevuto un pacchetto con numero compreso tra [base-N, base-1], deve essere generato un ACK, anche se questo è un pacchetto che il receiver ha già riscontrato.
+3. altrimenti, ignorare il pacchetto.
+
+
+
+
+
+
+
+
+Riassunto dei meccanismi.
+
+3.5	TRASPORTO ORIENTATO ALLA CONNESSIONE: TCP
+Il TCP si appoggia a molti dei principi base discussi nel paragrafo precedenti, inclusi rilevazione degli errori, ritrasmissioni, riscontri cumulativi, timer e campi di intestazione per i numeri di sequenza.
+
+3.5.1	LA CONNESSIONE TCP
+Si dice che TCP è orientato alla connessione perché prima che un processo applicativo possa comunicare a spedire dati a un altro, i due processi devono scambiarsi un handshake; cioè essi devono prima inviarsi alcuni segmenti preliminari per stabilire i parametri del successivo trasferimento di dati.
+Una connessione TCP fornisce un trasferimento dei dati full duplex (cioè consente ai dati di viaggiare contemporaneamente nelle due direzioni) ed è anche point-to-point, cioè fra un singolo sender a un singolo receiver. Il processo che inizia la connessione è il client, mentre l’altro è il server. Il processo applicativo del client prima informa il RCP client che vuole stabilire una connessione con un processo nel server. Lo stato di trasporto nel client allora procede per stabilire la connessione TCP con il TCP server, dapprima il client invia un segmento TCP; il server risponde con un secondo segmento TCP; e alla fine il client risponde ancora con un terzo segmento. I primi due segmenti non contengono “carico utile” (payload), il terzo piò trasportare un carico utile.  handshake a tre vie poiché sono scambiati tre segmenti. Stabilita la connessione i due processi si scambiano dati. Il processo client passa uno stream (flusso) di dati attraverso il socket. Una volta attraversata la posta i dati sono nelle mani del TCP che funziona nel client. Il TCP indirizza questi dati al buffer di spedizione (send buffer) della connessione, che è uno dei buffer che viene riservato durante l’iniziale handshake a tre vie.
+
+3.5.2	STRUTTURA DEL SEGMENTO TCP
+Consiste di campi di intestazione e di un campo dati (contiene una parte dei dati dell’applicazione). L’intestazione comprende numeri di porta sorgente e destinazione, che sono usati per il multi/demultiplexing dei dati da/verso le applicazioni dello strato superiore; comprende un campo checksum. Inoltre, contiene: (1) i campi a 32 bit numero di sequenza e numero di riscontro, (2) il campo a 16 bit dimensione finestra che è usato per il controllo del flusso di dati, (3) i campi a 4 bit lunghezza intestazione che specifica la lunghezza in parole a 32 bit, (4) il campo facoltativo e di lunghezza variabile opzione, che è usato quando un sender e un receiver negoziano la massima dimensione del segmento o come fattore di scala della finestra per l’uso nelle reti ad alta velocità., (5) il campo flag contiene 6 bit: il bit ACK (indica che il valore portato nel campo di riscontro è valido), RST, SYN, FIN (usati per stabilire o interrompere la connessione), PSH (se settato indica al receiver di passare i dati allo stato superiore) e URG (usato per contrassegnare che ci sono dati dello strato superiore che il sender contrassegna come urgenti).
+Numeri di sequenza e numeri di riscontro
+Il numero di sequenza per un segmento è il numero all’interno del flusso del primo byte nel segmento. Cosa deve fare un host quando riceve segmenti fuori ordine in una connessione TCP? TCP non impone alcuna regola e lascia qualunque decisione a chi programma un’applicazione TCP. Ci sono due possibilità: 1. Il receiver scarta i byte fuori ordine, oppure 2. Conserva i byte fuori ordine e spetta che quelli mancati arrivano a chiudere il “buco”.
+
+3.5.4	TRASFERIMENTO AFFIDABILE DEI DATI
+Ricordiamo che il servizio Internet dello strato di rete (servizio IP) è inaffidabile. Poiché i segmenti dello strato di trasporto sono trasportati attraverso la rete da datagram IP, anch’essi possono essere soggetti a questi problemi  il TCP crea un servizio di trasferimento affidabile dei dati, sopra al servizio inaffidabile best effort di IP.
+La gestione dei timer TCP usa un unico timer di ritrasmissione, anche se ci sono molteplici segmenti trasmessi ma non ancora riscontrati.
+Inizieremo da una versione semplificata di un mittente (sender) TCP. Ci sono tre principali eventi: 1. Ricezione dei dati dall’applicazione sovrastante; 2. Timeout del timer; 3. Ricezione di un ACK.
+- Quando si verifica il n. 1 il TCP riceve i dati dall’applicazione, li incapsula in un segmento e passa il segmento a IP. Il TCP avvia il timer quando il segmento viene passato all’IP.
+- Il TCP risponde all’evento timeout ritrasmettendo il segmento che causato il timeout stesso, e viene riavviato il timer.
+- L’avvio di un segmento di riscontro (ACK) dal ricevente (un segmento che contiene un valore valido nel campo ACK). Il TCP confronta il valore y di ACK con la sua variabile SendBase (numero di sequenza del più piccolo byte non riscontrato). Dato che TCP usa il riscontro cumulativo, y riscontra la ricezione di tutti i byte prima del byte numero y. Se y>SendBase, allora ACK sta riscontrando uno o più segmenti non riscontrati prima, quindi il mittente aggiorna la sua variabile SendBase e riavvia il time se ci sono segmenti non ancora riscontrati.
+Raddoppio dell’intervallo di timeout
+Quando si verifica un evento di timeout, il TCP ritrasmette il segmento non ancora riscontrato avente il più piccolo numero di sequenza, ma ogni volta che il TCP ritrasmette, esso imposta il prossimo timeout al doppio del valore precedete. Gli intervalli crescono quindi esponenzialmente dopo ogni ritrasmissione. Questi intervalli forniscono una forma limitata di controllo della congestione.
+Ritrasmissione veloce
+Un problema è che spesso il periodo di timeout per una ritrasmissione è spesso lungo. Ma un mittente può rilevare la perdita di un pacchetto molto prima che si verifichi un evento di timeout notano gli ACK duplicati. Cioè un ACK che ri-riscontra un segmento per il quale il mittente ha già ricevuto un riscontro precedente. Tramite la seguente tabella possiamo capire la risposta del sender a un ACK duplicato.
+Se si perde uno dei segmenti, ci saranno molti ACK duplicati contigui. Se il sender TCP riceve tre duplicati ACK per gli stessi dati, prende questa indicazione conferma che il segmento successivo a quello riscontrato tre volte è andato perso. Nel caso di tre duplicati ACK, il TCP esegue una ritrasmissione veloce, ritrasmettendo il segmento mancante prima che il timer di quel segmento scada.
+TCP deve solo ricordare il più piccolo numero di sequenza di un byte da trasmettere. Il questo senso, TCP assomiglia molto a un protocollo in stile GBN.
+Una proposta per il TCP è il riscontro selettivo, che consente a un ricevente TCP di riscontrare selettivamente segmenti fuori sequenza, piuttosto che riscontrare cumulativamente l’ultimo segmento ricevuto correttamente. Quindi il meccanismo di recupero degli errori di TCP può essere classificato come un ibrido dei protocolli GBN e RS.
+
+3.5.5	CONTROLLO DEL FLUSSO
+Quando la connessione TCP riceve byte che sono corretti e in sequenza, colloca i dati nel buffer di ricezione e il processo dell’applicazione associato leggerà i dati da questo buffer. Ma se questa lettura fosse lenta il buffer si potrebbe saturare con i dati inviati dal sender. TCP quindi fornisce un servizio di controllo del flusso, per eliminare la possibilità che il sender saturi il buffer del receiver, attraverso l’adattamento della velocità. Un sender TCP può essere “strozzato” a causa della congestione entro la rete IP e a questa forma di controllo ci si riferisce come al controllo della congestione.
+- Controllo del flusso: TCP fornisce il controllo di flusso attraverso il mantenimento nel sender di una finestra variabile detta finestra di ricezione, ed è usata per dare al sender un’idea di quanto spazio è disponibile nel buffer del receiver. In una connessione full-duplex, il sender a ciascun lato della connessione mantiene una diversa finestra di ricezione. La finestra di ricezione è dinamica; cioè varia durante il tempo di connessione.
+Supponiamo host A stia inviando un grande file all’host B su una connessione TCP, all’host B viene assegnato un buffer di ricezione, e contrassegnando la sua dimensione con RcvBuffer. A intervalli, il processo dell’applicazione dell’host B controlla che la RcvWindow (finestra) = (RcvBuffer) - (dati entrai fino a quel momento). Poiché lo spazio disponibile cambia con il tempo, RcvWindow è dinamica. Per risolvere un problema, la specifica del TCP richiede che l’host A continui a inviare segmenti con un byte di dati quando la finestra di ricezione di B è a zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.5.6	GESTIONE DELLA CONNESSIONE TCP
+La creazione della connessione TCP può significativamente accrescere i ritardi percepiti.
+Il processo dell’applicazione del client dapprima informa il TCP che vuole stabilire una connessione con un processo nel server. Il TCP client procede allora a stabilire la connessione TCP con il TCP nel server nel seguente modo:
+Passo 1: il TCP del lato client prima invia uno speciale segmento TCP al TCP del lato server. Questo segmento non contiene dati dello strato di applicazione. Ma il bit SYN è posto a 1 ed è per questo motivo che il segmento è detto segmento SYN. Inoltre, il client sceglie un numero di sequenza iniziale (client_isn) e lo inserisce nel campo numero di sequenza iniziale SYN del TCP. Il segmento viene incapsulato in un datagram IP e inviato al server.
+Passo 2: quando il TCP arriva al server dell’host, il server estrae il segmento SYN, destina il buffer TCP e le variabili alla connessione, e invia al client TCP un segmento che autorizza la connessione. Anche qui abbiamo il bit SYN a 1, e il client_isn+1 e il server sceglie il primo numero di sequenza inziale (server_isn).
+Passo 3: dopo la ricezione, anche il client destina buffer e variabili alla connessione. Viene inviato un ulteriore segmento che autorizza la connessione con server_isn+1 e il bit SYN posto a 0, poiché la connessione è stabilita.
+Completati i tre passi gli host client e server possono scambiarsi segmenti contenenti dati.  per via di questi tre passi ci si riferisce a questa procedura come a un handshake a tre vie.
+Ciascuno dei due processi può chiudere la connessione. E quando viene chiusa una connessione le “risorse” (buffer e variabili) negli host vengono de-allocati. Supponiamo che il lato client voglia chiudere la connessione TCP, allora invia un segmento a un bit nel campo flag dell’intestazione, il bit FIN che è posto a 1. Quando il server lo riceve invia un messaggio di riscontro. Il server invia il suo segmento di interruzione, cha ha il bit FIN a 1. E infine il client riscontra il segmento di interruzione del server e le risorse nei due host sono state de-allocate.
+
+3.6	PRINCIPI DEL CONTROLLO DELLA CONGESTIONE
+Per trattare la causa della congestione della rete servono dei meccanismi per “strozzare” i sender al verificarsi della congestione.
+
+3.6.2	APPROCCI AL CONTROLLO DELLA CONGESTIONE
+Esamineremo i due grandi approcci al controllo della congestione:
+- Controllo della congestione end-end: lo stato di rete non fornisce alcun supporto esplicito allo strato di trasporto per il controllo della congestione. Vedremo in seguito come TCP deve adottare questo approccio end-to-end perché lo strato IP non fornisce alcun feedback relativo alla congestione della rete ai terminali.
+- Controllo della congestione assistito dalla rete: i componenti dello strato di rete (router) forniscono al sender un feedback esplicito relativo allo stato di congestione nella rete.
+
+3.7	CONTROLLO DELLA CONGESTIONE TCP
+L’approccio è quello di far sì che ogni mittente limiti il ritmo a cui immette traffico nella sua connessione in funzione della congestione percepita in rete. Il meccanismo di controllo della congestione del TCP da entrambi i lati della connessione deve tenere traccia di un’altra variabile, cioè la finestra di congestione (congestion window). Questa finestra, denotata con CongWin (è dinamico) impone una limitazione addizionale alla quantità di traffico che un host può inviare in una connessione. L’ammontare dei dati non riscontrati che un host può avere all’interno della connessione TCP non deve superare il minimo tra CongWin e RcvWin, che è:
+LastByteSent – LastByteAcked <= min {CongWin, RcvWin}
+All’inizio di ogni tempo di round-trip (RTT), il limite sopra esposto permette al mittente di inviare CongWin byte di dati nella connessione, e alla fine del RTT il mittente riceve i riscontri per i dati. Quindi il ritmo di invio del mittente è circa CongWin/RTT.
+Ora possiamo studiare l’algoritmo che un sender TCP usa per regolare il suo ritmo di invio in funzione della congestione percepita, l’algoritmo si controllo della congestione di TCP. Ha tre componenti: (i) incremento additivo, decremento moltiplicativo, (ii) partenza lenta (slow start) e (iii) reazione a eventi di timeout.
+- (i) Incremento additivo e decremento moltiplicativo (AIMD)
+L’idea è quella di far ridurre al mittente il suo ritmo di invio (diminuendo la dimensione della finestra) quando si verifica un evento di perdita. Viene usato l’approccio detto decremento moltiplicativo, che dimezza il valore attuale di CongWin dopo un evento di perdita. Se invece deve aumentare il suo ritmo quando non percepisce perdite, l’aumento della finestra avviene lentamente. Ogni volta che riceve un ACK. Un mittente aumenta la sua CongWin approssimativamente di un MSS per ogni RTT fin quando non si verifica un evento di perdita. La fase di incremento lineare del protocollo è nota come prevenzione della congestione (congestion avoidance).
+- (ii) Partenza lenta (slow start)
+Quando si inizia una connessione il valore di CongWin è inizializzato a MSS, dando luogo a un ritmo di invio di MSS/RTT. Ma dato che la banda disponibile per la connessione potrebbe essere molto maggiore di MSS/RTT, sarebbe un peccato aumentare il ritmo solo linearmente, sottoponendosi a un lungo ritardo. Quindi invece di incrementare il suo ritmo linearmente durante questa fase iniziale, un mittente TCP aumenta il ritmo esponenzialmente raddoppiando il valore di CongWin ogni RTT. Continua con questo aumento fino a quando non si verifica un evento di perdita, al che il CongWin viene dimezzato e continuerà a crescere linearmente. Il mittente realizza la crescita esponenziale aumentando il valore di CongWin di un MSS ogni volta che un segmento trasmesso viene riscontrato.
+- (iii) Reazione a eventi di timeout
+Dobbiamo però anche sottolineare che il controllo della congestione di TCP reagisce in modo diverso a un evento di perdita relativo attraverso un evento di timeout rispetto a un evento di perdita rilevato tramite la ricezione di un ACK duplicato tre volte. 1. Dopo un ACK duplicato tre volte il TCP di comporta come abbiamo appena descritto, cioè dimezza la finestra e poi aumentata linearmente. 2. Dopo un evento di timeout, il mittente TCP entra in una fase di partenza lenta, cioè pone la finestra pari a MSS e incrementa la finestra esponenzialmente. La finestra continua a crescere esponenzialmente finché CongWin raggiunge la metà del valore che aveva prima dell’evento di timeout. E a questo punto CongWin cresce linearmente (come avrebbe fatto dopo un ACK duplicato).
+TCP gestisce queste dinamiche più complesse mantenendo una variabile Threshold (soglia).
+3.7.1 fairness (saltato)
+3.7.2 modellazione del ritardo di TCP (saltato)
+
+
+
+
+
+CAPITOLO 4
+Strato di rete e instradamento: per fornire i servizi di comunicazione da processo a processo, lo stato di trasporto fa affidamento sui servizi di comunicazione da terminale a terminale fornito dallo strato di rete.
+
+4.1	INTRO E MODELLI DI SERVIZIO DELLA RETE
+Nella figura abbiamo due host, H1 e H2, e molti router sul percorso tra di loro. Supponiamo che H1 stia mandando info a H2 e consideriamo il ruolo dello stato di rete nel tragitto. Lo stato di rete di H1 prende i segmenti dallo stato di trasporto, li incapsula ognuno in un datagram (cioè, un PDU di stato di rete) e manda il datagram al suo router più vicino R1. Da R1 va i R2, che è il router più vicino a H2. Lo strato di rete di H2 riceve il pacchetto da R2 e lo invia allo stato di trasporto in alto. Il router deve “effettuare la transizione” dei pacchetti dal link di ingresso a quello di uscita, cioè senza gli strati al di sopra di quello di rete (sui router non girano gli stati di trasporto e di applicazione).
+Ruoli:
+- Determinazione del percorso: deve determinare il tragitto o percorso seguito dai pacchetti dal sender al receiver. Attraverso gli algoritmi di instradamento (routing algorithms).
+- Commutazione: quando un pacchetto giunge all’ingresso di un router, questo deve trasferirlo all’appropriato link in uscita.
+- Instaurazione della chiamata: in modo analogo all’handshake a tre vie anche lo stato di rete (ATM) richiedono che il router lungo il percorso scelto dalla sorgente alla destinazione si scambino un handshake in modo da impostare lo stato prima che i dati iniziano a fluire.
+Instradamento (routing) = processo globale, che copre l’intera rete, e che determina i percorsi da estremo a estremo che i datagram seguiranno dalla sorgente alla destinazione.
+Rilancio (forwarding) = l’azione eseguita localmente nel router di trasferimento di un datagram dall’interfaccia di un link di ingresso all’opportuna interfaccia di un link di uscita.
+
+4.1.1	MODELLO DI SERVIZIO DELLA RETE
+Tramite il modello di servizio fornito dallo strato di rete, sappiamo come comportarci in determinate situazioni. Questo modello definisce le caratteristiche del trasporto end-to-end dei dati fra un “estremo” della rete a un altro, cioè tra i terminali.
+Datagram o circuito virtuale?
+Una astrazione fornita dallo strato di rete allo strato superiore è l’uso del circuito virtuale (VC, Virtual Circuit). Vista nel capitolo 1, è una rete a commutazione di pacchetto a VC si comporta come una rete telefonica, che usa “circuiti reali” invece di “circuiti virtuali”.
+Esistono tre fasi identificabili:
+1. Instaurazione del VC: il sender contatta lo stato di rete, specifica l’indirizzo del receiver e aspetta l’instaurazione della rete del VC. Lo strato di rete determina il percorso tra sender/receiver, cioè i link e i commutatori di pacchetto su cui viaggeranno i pacchetti del VC. Questa operazione coinvolge l’aggiornamento delle tabelle in ciascun commutatore sul percorso.
+2. Trasferimento di dati: stabilito il VC, i dati possono cominciare a percorrerlo.
+3. Interruzione del VC: inizia quando il sender (o il receiver) informa lo strato di rete del suo desiderio di interrompere il VC. Allora lo strato di rete segnerà l’interruzione della chiamata all’altro terminale e aggiornerà le tabelle nei commutatori sul percorso per indicare che il VC non esiste più.
+ l’instaurazione della connessione nello strato di trasporto coinvolge solo i due terminali, mentre quello a livello di strato di rete i commutatori dei pacchetti lungo il percorso fra i due terminali sono coinvolti nell’instaurazione del circuito, e ciascun commutatore è pienamente consapevole di tutti i VC che l’attraversano.
+Messaggi di segnalazione (signaling messages) = i messaggi che i terminali inviano alla rete per indicare l’inizio o la fine di un VC, e quelli che passano fra i commutatori per impostare il VC (cioè per modificare le tabelle di instradamento).
+Protocollo di segnalazione (signaling protocols) = sono i protocolli usati per scambiare i messaggi di segnalazione.
+Con uno strato di rete datagram, ogni volta che un terminale vuole inviare un pacchetto lo contrassegna con l’indirizzo del terminale destinatario, poi o invia nella rete. Come vediamo nell’immagine questo si ottiene senza alcuna instaurazione del VC. I commutatori di pacchetto in una rete datagram non mantengono alcuna informazione di stato relativa ai VC (perché non ce ne sono). Usano una tabella di instradamento.
+L’architettura attuale di internet fornisce solo un modello di servizio, il datagram che è detto servizio best-effort.
+
+4.4	PROTOCOLLO INTERNET (IP)
+Lo strato di rete di Internet ha tre componenti:
+1. Protocollo di rete, che definisce l’indirizzamento dello strato di rete. Detto anche Internet Protocol o IP. (parleremo della versione 4)
+2. Determinazione dell’instradamento, determina il percorso che un datagram segue dalla sorgente alla destinazione.
+3. Registrare gli errori nei datagram e di rispondere alle richieste di alcune informazioni relative allo stato di rete.
+
+4.4.1	INDIRIZZAMENTO IP
+Prima di discutere dell’indirizzamento, doppiamo parlare del come host e router sono collegati in rete. Un host ha solo un link nella rete e quando vuole spedire un datagram, lo fa su questo link. Il confine tra l’host e il link fisico è chiamato interfaccia. Un router invece, poiché deve ricevere un datagram da un link in “ingresso” e rilanciarlo su un link in “uscita”, deve essere collegato a due o più link. Anche qui il confine tra un router e ciascuno dei suoi link è detto interfaccia. Quindi un router ha molte interfacce, una per ciascun link. Il protocollo Internet richiede che ciascuna interfaccia abbia un indirizzo IP. (Quindi questo indirizzo è più associato a un’interfaccia piuttosto che all’host o al router)
+Indirizzo IP  è lungo 32 bit, ed esistono in totale  possibili indirizzi IP. Questi indirizzi sono scritti nella notazione decimale puntata, dove ogni byte è scritto nella sua forma decimale ed è separato da un punto dagli altri byte.
+Esempio: 193.32.216.9, il 193 è l’equivalente decimale dei primi otto bit dell’indirizzo.
+Questo indirizzo in binario è: 11000001 00100000 11011000 00001001
+ Ciascuna interfaccia di ciascun host e router nelle globalità di Internet deve avere un indirizzo che è globalmente unico.
+La stessa rete ha un indirizzo: 223.1.1.0/24, dove la notazione 0/24, chiamata maschera della rete (network mask/subnet mask), indica che i 24 bit più a sinistra definiscono l’indirizzo della rete. A questi 24 bit ci si riferisce come al prefisso di rete (network prefix). La rete 223.1.1.0/24 consiste di tre interfacce degli host (223.1.1.1, 223.1.1.2 e 223.1.1.3) e un’interfaccia del router (223.1.1.4). Qualunque ulteriore host collegato alla rete 223.1.1.0/24 dovrà avere un indirizzo della forma 223.1.1.xxx. (nella figura a sx1)
+(figura a sx2) Mostra tre router che sono collegati tra loro con un link punto-a-punto. Ogni router ha tre interfacce, una per ogni link punto-a-punto, e una per il link broadcast che collega direttamente il router a una coppia di host. Le reti IP presenti sono: tre, 223.1.1.0/24, 223.1.2.0/24 e 223.1.3.0/24. Ma abbiamo anche delle reti addizionali, per le interfacce che collegano i tre router.
+  L’indirizzamento in Internet definiva quattro classi dell’indirizzo, conosciuto come indirizzamento per classe (class-full addressing), ma formalmente non sono più parte dell’architettura IP. Il requisito che la parte della rete di un indirizzo IP sia lungo esattamente uno, due o tre byte diventava problematico per supportare il numero in rapida crescita delle società con reti piccole e medie dimensioni.
+Venne standardizzato il Classless InterDomain Routing – CIDR. Con le reti a indirizzamento CIDR, la parte di un indirizzo IP relativa alla rete può avere lunghezza a piacere invece di essere costretta in 8, 16 o 24 bit. Questa rete ha la forma decimale puntata del tipo a.b.c.d/x, dove x indica il numero di bit più significativi nella quantità di 32 bit che costituisce la parte dell’indirizzo relativo alla rete.
+
+
+Ottenere un indirizzo di rete
+Per ottenere un blocco di indirizzi IP da utilizzare all’interno della rete, un amministratore di rete deve contattare il suo ISP, che può fornire gli indirizzi estraendoli da un gruppo di indirizzi più grande che gli è già stato assegnato.
+Ottenere un indirizzo di terminale
+Una volta che un’organizzazione ha ottenuto un blocco di indirizzi dal suo ISP, essa può assegnare indirizzi IP individuali alle interfacce di host e router nell’organizzazione. (i) per gli indirizzi delle interfacce di router è l’amministratore di sistema a configurare manualmente gli indirizzi IP nel router; (ii) per gli host può essere assegnato un indirizzo IP:
+	- Configurazione manuale.
+	- Dynamic Host Configuration Protocol (DHCP), che permette all’host di ottenere un indirizzo IP automaticamente. Viene usato per assegnare a ognuno dei terminali che si connettono un indirizzo IP temporaneo.
+
+4.4.2 TRASPORTO DI UN DATAGRAM DALLA SORGENTE ALLA DESTINAZIONE
+Un datagram IP è fatto nel seguente modo 
+Ha un campo per l’indirizzo sorgente e uno per l’indirizzo destinazione. L’host sorgente riempie il campo dell’indirizzo sorgente con il suo indirizzo IP a 32 bit, e riempie anche il campo dell’indirizzo di destinazione con l’indirizzo IP dell’host di destinazione. Il campo dati è riempito con un segmento TCP o UDP.
+
+Supponiamo che l’host A voglia inviare un datagram IP all’host B che risiede nella sua stessa rete, 223.1.1.0/24. L’IP nell’host A prima consulta la sua tabella interna di rilancio (forwarding table) e trova una voce, 223.1.1.0/24, il cui indirizzo di rete è in accordo con i bit principali nell’indirizzo IP dell’host B. la tabella indica che il numero di salti (hop) per giungere alla rete 223.1.1.0 è 1, indicando che B è proprio sula stessa rete di A. Quindi l’host A sa che può raggiungere B direttamente attraverso la sua interfaccia di uscita, senza la necessità di un router. Allora l’host A passa il datagram IP al protocollo dello strato di collegamento che lo trasporterà all’host B.
+
+Cosa succede quando l’host A vuole inviare un datagram a un altro host E, che appartiene a una rete diversa. L’host A consulata la tabella forwording di A e trova l’indirizzo IP dell’host E. Poiché il numero di hop è 2, l’host A riconosce che la destinazione è su’unaltra rete e sarà coinvolto un router. La tabella dice all’host A che per inviare il datagram IP all’host E, lo deve prima inviare all’indirizzo IP 223.1.1.4. l’IP nell’host A passa allora il datagram giù allo strato di collegamento e gli indica che dovrebbe spedire il datagram all’indirizzo del router. Nonostante il datagram viene spedito all’interfaccia del router, il suo indirizzo di destinazione rimane quello dell’host E.
+Il datagram ora è nel router, ed è compito del router inoltrare il datagrama alla sua destinazione finale. Il router consulta la sua tabella di rilancio e trova la voce 223.1.2.0/24, il cui indirizo di rete si accorda con i principali nell’indirzzo IP dell’host E. La sua tabella indica che l’interfaccia del router dove può essere inviato il datagram. Poiché il numero di hop è 1, il router sa che l’host E è sulla stessa rete. Il router muove il datagram verso l’interfaccia e lo trasmette all’host E.
+Router: è vuota, perché non è necessario passare da un altro router intermedio per raggiungere l’host di destinazione.
+ Le tabelle di forwording (o rilancio) devono essere configurate in modo che i datagram seguano “buoni” percorsi da sorgente a destinazione (attraverso gli algoritmi di instradamento).
+
+4.4.3	FORMATO DEL DATAGRAM
+Campi sono i seguenti:
+- Numero delle versione  i quattro bit specificano la versione nel protocollo IP del datagram.
+- Lunghezza dell’intestazione (header lenght)  bit che indicano dove inziano realmente i dati nel datagram. È di 20 byte.
+
+- Tipo di servizio  specificato per permettere ai diversi “tipi” di datagram IP di essere distribuiti tra loro.
+- Lunghezza del datagram  lunghezza totale del datagram IP in byte e poiche il campo è lungo 16 bit, la lunghezza massimo teorica dei un datargram IP è 65 535 byte. Anche se raramente un datagram super i 1500 byte.
+- Identificatore, indicatori (flag), offset di fraammento  hanno a che fare con la frammentazione IP.
+- Tempo di vita  esiste per assicurare che un datagram non circoli per sempre. Il campo è decrementato di uno ogni volta che un datagram è eleavorato da un router.
+- Protocollo  indica il protocollo dello strato di trasporto del destinatario.
+- Checksum dell’intestazione  la cheecksum dell’intestazione aiuta un router a rilevare gli errori nei bit in un datagram IP che riceve. Quindi abbiamo il controllo degli errori per entrami gli strati di trasporto e di rete.
+- Indirizzi IP sorgente/destinazione  contengono gli indirizzi IP a 32 bit della sorgente e della destinazione.
+- Opzioni  permette a un’intestazione IP di essere allargata.
+- Dati (payload) contiene i degmenti dello strato di trasporto (TCP o UDP) da inviare alla destinazione. Questo campo può comprende altri tipi di dati, come i messaggi ICMP.
+
+
+
+
+4.4.4	FRAMMENTAZIONEA DEL DATAGRAM IP
+La massima quatità di dati che un pacchetto dello strato di collegamnto può trasportare è detto MTU (unità massima trasferita). E poiché ciascun datagram IP è incapsulato all’interno di un pacchetto dello strato di collegamnto per il trasporto da un router successivo, l’MTU del protocollo dello strato di collegamento pone un limite alla lunghezza di un datagram IP. Inoltre, ciascuno dei link lungo il percorso fra sender e destinatario può usare differenti protocolli dello strato di collegamnto , e ciascuno di questi protocolli può avere un diverso MTU.
+Supponiamo di ricevere un datagram IP da un link, di controllare la tabella forwording per il link di uscita e che il link abbia un MTU che è inferiore alla lunghezza del datagram IP i dati del datagram IP vegnono frammentati.  Questi frammenti richiedono di essere riassemblati prima di raggiungere lo strato di tasporto delle destinazione, questo compito fu affidato ai terminali piùttosto che ai router, per tenenre il protocollo semplice. Per permettere il riassemblaggio vengono usati i campi identificazione, indicatori e frammentazione. Quando un router ha la necessità di frammentare un datagram, ciascun frammento che ne risulta è contrassegnato con gli indirizzi sorgente e destinazione, e con il numero di identificazione del datagram originale. Quando il destinatario riceve dei datagram dallo stesso host, può esaminare il numero di identificazione per satbilire quali sono frammenti di un datagram più grande.
+Ma poiche il servizio IP è inaffidabile, alcuni frammenti potrebbero non arrivare. Per assicurarsi di aver ricevuto tutti i frammenti, ci sono due precauzioni:
+- Per assicurarsi che l’host di destinazione si sicuro di aver ricevuto l’ultimo frammento del datagram originale, l’ultimo frammento ha il bit indicatore (flag bit) posto a 0, mentre tutti gli altri frammenti hanno il bit posto a 1.
+- Il campo offset è usato per indicare dove il frammento si deve inserire nel datagram IP originale.
+
+4.4.5	ICMP: PROTOCOLLO DEI MESSAGGI DI CONTROLLO DI INTERNET
+È usato da host, router e gareway per scambiarsi le informazion dello strato di rete. L’aspetto più tecnico è per il riscontro degli errori.
+
+4.4.6	PROTOCOLLO DI CONFIGURAZIONE DINAMICA DEGLI HOST -DHCP
+È un protocollo client-server. Nel caso più semplice, ogni rete avrà un server DHCP. Se sulla rete non è presente alcun server, è necessario un agente DHCP (tipicamente un router) che conosce l’indirizzo di un server DHCP per quella rete.
+Per un terminale appena arrivato, il protocollo DHCP costituisce un processo in quattro passi:
+1. Individuazione del server DHCP: questo è fatto utilizzando un messaggio di scoperta DHCP, che un client invia in un datagram IP sulla porta 67. Il messaggio è mandato in broadcast dal client DHCP usando l’indirizzo di destinazione broadcast 255.255.255.255 e un indirizzzo di sorgente per “questo terminale” di 0.0.0.0. questo messaggio sarà ricevuto da tutte le macchine della rete , incluso qualunque serve DHCP.
+2. Offerta(e) dei server DHCP: un server DHCP riceve il messaggio di scoperta e risponde al client con un messaggio di offerta DHCP. In questo messaggio ci sono alcune informazioni, tra cui il tempo di affitto dell’indirizzo IP.
+3. Richiesta DHCP: l’utente sceglierà l’offerta e risponderà con un messaggio di richiesta DHCP, che contiene i parametri di configurazione.
+4. ACK DHCP: il server risponderà con un messaggio di ACK DHCP, che conferma i parametri richiesti.
+A questo punto il client può usare l’indirizzo IP allocato da DHCP per la durata dell’affitto. DHCP permette al cinet di rinnovare il suo affitto su un indirizzo IP, se lo vuole.
+
+4.4.7	NAT – NETWORK ADDRESS TRANSLATORS
+Sappiamo ora ceh ogni dispositivo che gestisce IP ha bisogno di un indirizzo IP. Esiste un apporccio più semplice all’allocazione degli indirizzi, cioè la traduzione degli indirizzi di rete – NAT (network address translation). L’indirizzamento all’interno della rete domestica ha le quattro interfacce con lo stesso indirizzo di rete 10.0.0/24. Ma questa volta c’è differenza tra la relazione tra il router domestico e l’ISP. Il router che opera secondo NAT non comunica con il router dell’ISP a cui è attacato mediante un protocollo di instradamento inter-AS, il router NAT non sembra nemanche un router per il mondo esterno. Ma il router NATsi comporta per il mondo esterno come un singolo dispositivo con un singolo indirizzo IP, tutto il traffico che lascia il router nomestico verso Internet ha un indirizzo IP sorgente di 138.76.29.7 e tutto il traffco che entra avrà lo stesso indirizzo come destinazione. NAT sta quindi nascondendo i dettagli della rete domestica al mondo esterno.
+Dato che tutti i datagram che arrivano al router NAT hanno lo stesso indirizo di destinazione, per capire a quale terminale interno quel particolare datagram deve arrivare si usa una tabella di traduzione NAT nel router NAT r di includere nelle voci della tabella i numeri di porta e gli indirizzi IP.
+Ci sono però alcune discussioni sull’uso del NAT …
+
+
+
+
+
+
+
+
+4.6	COSA CONTIENE UN ROUTER
+Dobbiamo ancora considerare la funzione di commutazione di un router: il reale trasferimento di datagram da un link in ingreso a un router all’appropriato link di uscita.
+Nell’architettura di un router possono essere identificate quattro componenti:
+1. porte di ingresso (input ports): svolge la funzione dello strato fisico (verde) di terminare un link fisico in ingresso al router. Svolge la funzione dello strato di collegamento (azzurro) necessaria per inter-operare con la funzionalità dello strato di collegamento all’altro lato del link in ingresso. Esgue anche una funzione di ricerca e rilancio (rosso) così che un pacchetto inoltrato all’interno del dispositivo emerga alla giusto porta di uscita.
+2. Dispositivo di comunicazione (switching fabric): collega le porte di ingresso con le porte di uscita. È una rete nella rete.
+3. Porte di uscita (output ports): immagazzina i pacchetti arrivati attraverso il dispositivo e poi li trasmette nul link di uscita.
+4. Processore di instradamento (routing processor): esegue il protocollo di instradamento.
+
+
+4.6.1	INPUT PORT
+Durante la funzione ricerca/rilancio (lookup/forwarding) il router determina la porta di uscita a cui sarà inviato il pacchetto in arrivo passando attraverso il dispositivo. La scelta viene fatta usando il la tabela forwarding che viene calcolata dal processo di instrdamento e una sua copia ombra è immagazzinata in ciascuna porta di ingresso e aggiornata dal procssore di instrdamento. Quindi ogni porta di ingresso può prendere decisioni di commutazione in modo locale, in questo modo decentralizzato si evita la creazione di un collo di bottiglia nella fase di inoltro in un singolo punto del router.
+
+4.6.2	DISPOSITIVO DI COMMUTAZIONE  - SWITCHING FABRICS
+È il nucleo del router. Attraverso questa struttura i pacchetti vengono spostati da una porta di ingresso a una porta di uscita. La commutazione (switching) può essere eseguita in molti modi:
+- Commutazione attravero la memoria : i primi, i router più semplici, erano cacolati tradizionalmente, con la commutazione tra porte di ingresso e porte di uscita eseguita sotto il controllo della CPU. Le porte funzionavano come dei dispositivi di I/O in un sistema operativo. Una porta di ingresso con un pacchetto in arrivo segnaava l’evento al processore di rilancio attraverso un interrupt. Il pacchetto veniva copiato nella memoria del processore e il processore di rilancio estraeva l’indirizzo di detinazione dall’intcstazione, cercava la porta di uscita appropriata nella tabello di rilancio (forwarding) e copiava il pacchetto nel buffer della porta di uscita.
+- Commutazione per mezzo di un bus : la porta di ingresso trasferisce un pacchetto direttamente alla port di uscita su un bus condiviso, senza l’intervento dei processore. Poiché il bus è condiviso, sul bus può essere trasferito solo una pacchetto alla volta. Se un pacchetto in arrivo a una porta in ingresso trova il bus occupato dal trasferimento di un altro pacchetto è bloccato dal passare ed è accodato alla porta in ingresso.
+- Commutazione attraverso una rete di interconnessione : un commutatore crossbar è una rete di iterconnessione che consiste di 2N bus che connettono N porte di ingresso a Nporte di uscita. Un pacchetto dalla porta di ingresso viaggia lungo il bus orizzontale collegato alla porta di ingresso finchè incontra il bus verticale che conduce alla porta di uscita desiderata. Se il bus verticale è (1) libero, il pacchetto è trasferito alla porta di uscita; se è (2) in uso, il pacchetto in arrivo è bloccato e deve essere accodato alla porta di ingresso.
+
+4.6.3	OUTPUT PORT
+L’elaborazione alla porta di uscita preleva i datagram che sono stati immagazzinati nella memoria della porta di uscita e li trasmette sul link in uscita. La gestione dell’accodamento e del buffer sono necessarie quando il dispositivo di comunicazione invia pacchetti alla porta di uscita a una velocità che supera quella del link in in uscita.
+
+4.6.4	DOVE SI VERIFICA L’ACCODAMENTO?
+Le code di pacchetti si possono formare a entrambe le porte, sia in ingresso che in uscita. Al crescere delle code, lo spazio di buffer del router potrebbe esaurirsi e portare alla perdita di pacchetti. Supponiamo che la velocità sulle linee di ingresso e di uscita siano tutte identiche, e che esistnon n porte di ingresso e n di uscita. Se la velocità del dispositivo di comunicazione è almeno n volte maggiore della velocità della linea di ingresso, non ci sarà alcun accodamento. Ma quando una porta in uscita è già occupata e arrivano altri pacchetti, la porta può trasmettere solo un singolo pacchetto nell’unità di tempo. Quindi i pacchetti arrivati verranno messi in coda (in attesa) per la trasmissione sul link di uscita. Una consequanza dell’accodamento alla porta di uscita è che lo scheduler di pacchetto di questa porta, fra i pacchetti accodati deve seglierne uno per la trasmissione. Questa selezione può essere eseguita sulla semplice base “primo arrivato-primo servito” (FCFS) o sulla base di una disciplina più sofisticata basata sull’accodamento pesato equo (WFQ, Weighted Fair Queuing), che suddivide il link in uscita “equamente” fra le diverse connessioni end-to-end che hanno pacchetti accodati per la trasmissione. Lo scheduling dei paccheti è fondamentale nel fornire garanzie di qualità del servizio. Se non c’è abbastanza memoria per memorizzare un pacchetto entrnate, si deve decidere se:
+	- scartare il pacchetto in arrivo, perdita di coda (drop-tail).
+	- rimuovere uno o più pacchetti già memorizzati nella coda per fare spazio per il pacchetto appena arrivato. Molto spesso scartare un pacchetto prima che il buffer sia pieno per fornire un segnale di congestione al mittentegli algoritmi di gestione attiva dalla coda (AQM) vengono usati per gestire queste situazioni.
+AQM:
+- Random Early Detection (RED): è il più diffuso. Qui viene mantenuta una media pesata della lunghezza della coda di uscita. Se la lunghezza nedia della coda è < a una sogmia minima (min), quando arriva un acchetto, esso viene ammesso nella coda. Al contrario, de la coda è piena o la lunghezza media della coda è > di una soglia massima (max), quando arriva un pacchetto esso viene marcato o scartato. Infine, se quando i pacchetto arriva trova una lunghezza media di coda nell’intervallo [min, max], il pacchetto viene scartato o marcato con una probabilità che è una funzione basata su min e max.
+[se la velocità per trasferire tutti i pacchetti entranti senza ritardo, allora l’accodamento dei pacchetti si verifica anche alle porte di ingresso]
+- Blocco in cima alla fila (HOL): quando ho due pacchetti in testa alle rispettive code di ingresso che sono destinati alla stessa porta di uscita in altro a destra. Il dispositivo di comunicazione sceglie di trasferire il pacchetto in testa alla coda in altro a sinistra, quindi il pacchetto in basso a snistra deve aspettare e anche il pacchetto dietri di lui deve farlo, anche se lui non è conteso per la porta di uscita centrale a destra. Questo fenomeno è conosciuto come HOL.
+
+4.7	IPv6
+Lo spazio di indirizzi IP a 32 bit stava cominciando a essere completamete usato. I progettisti di IPv6 sfruttarono la loro conoscneza per realizzarlo e migliorarne alcuni aspetti.
+4.7.1	FORMATO DEL DATAGRAM IPv6
+Ecco le più importanti modifiche:
+- Espansione delle capacità di indirizzamento  incrementa le dimensioni dell’indirizzo IP da 32 a 128 bit. Viene introdotto un nuovo tipo di indirizzo, il anycast address, che permette a un datagram indirizzato a un anycast address sia consegnato a un host qualsiasi di un gruppo host.
+- Intestazione semplificata di 40 byte  molti campi sono stati eliminati o resi opzionali. La risultante intestazione con lunghezza fissa di 40 byte permette una più veloce elaborazione del datagram IP.
+- Etichette del flusso e priorità  la definizione è “l’etichettatura dei pacchetti appartenenti a un certo flusso per il quale il sender richiede una particolare gestione, come per esempio una qualità di servizio diversa da quelle di default o il servizio in tempo reale”.
+Abbiamo quindi i seguenti campi:
+	- Versione;
+	- Classe di traffico;
+	- Etichetta di flusso;
+	- Lunghezza campo dati;
+	- Limite di hop;
+	- Indirizzi di sorgente e destinazione;
+	- Dati.
+Possiamo vedere che molti cmapi che erano presenti nell’IPv4 aono scomparsi nel IPv6. Come la (i) Frammentazione/Riassembrlaggio  non è prevista la frammentazione ai router intermedi, questa operazione può essere eseguita solo alla sorgente e alla destinazione. Se un datagram IPv6 ricevuto da un router è troppo grande per essere inoltrato sul link in uscita, esso viene scartato e verrà restituito un messaggio ICMP di errore “pacchetto troppo grande”. A questo punto il sendere può fare nuovamente l’invio con datagram IP di dimensioni più piccole. (ii) laChecksum  poiché i protocolli dello strato di trasporto (TCP e UDP) e di collegamento (Ethernet) negli strati di Internet eseguono il calcolo del checksum, quindi avanno creduto che fosse un’azione ridondante. (iii) Opzioni  non è sparito, ma può essere uno dei puntatori “intestazione successiva” compresi nell’intestazione di IPv6.
+Un nuovo ICMP
+Oltre a riorganizzare le definisioni esistenti dei tipi e dei codici ICMP, ne sonon state aggiunte anche di nuove. Come il tipo “pacchetto troppo grande”, e il codice di errore “opzioni di IPv6 non riconosciute”. Inoltre ICMP s’incarica la funzionalità del IGMP (internet group managment protocol).
+
+4.7.2	LA TRANSIZIONE DA IPv4 A IPv6
+Come avverra la transazione da IPv4 a IPv6?
+- Si dichiara un “flag day”, cioè si fissa un’ora e una data in cui tutte le macchine Internet riceveranno l’aggiornamento. Questo evento coninvolge centinaia di milioni di macchine e milioni di amministratori di rete e utenti, oggi sarebbe impensabile e lo era anche allora no flag day
+- Metodo Dual-stack è quello più immediato per introdurre i nodi IPv6, dove i nodi hanno anche una completa implementazione IPv4. Questo nodo IPv6/IPv4 ha la possibilità di inviare e ricevere entrambi i datagram, deve avere indirizzi dia IPv6 che IPv4 e devono essere in grado di determinare se un altro nodo è IPv6 compatibile o solo IPv4.
+Supponiamo che il nodo A è IPv6 compatibile e vuole inviare un datagram IP al nodo F, anche lui IPv6 compatibile. I nodi A e B possono scambiarsi pacchetti IPv6 compatibili, ma il nodo B deve creare un datagram IPv4 da inviare al nodo C. Nell’effettuare la conversione, ci saranno campi specifici di IPv6 nel datagrama che non hanno il corrispettivo in IPv4. L’informazine di questi campi verrà persa.
+- Aleternativa al Dual-stack è il tunneling. Può risolvere il problema permettendo a E di ricevere il datagram IPv6 originario da A. Supponiamo che due nodi IPv6 (B ed E) vogliono inteoperare usando IPv6, ma che siano collegati tra loro attraverso l’intervento di router IPv4. Ci riferiamo al gruppo di router IPv4 come a un tunnel. Il nodo B prende il datagram e lo spedisce nel tunnel per intero e lo inserisce nel campo dati di un datagram IPv4. Il nodo dall’altra parte, E, determina che il datagram IPv4 contiene un datagram IPv6, lo estrae e lo rilancia verso il nodo destinazione.
+
+4.2	PRINCIPI DI INSTRDAMENTO (cap 5 slide)
+Per trasferire i pacchetti da un host che spedisce all’host di destinazione, lo strato di rete deve determinare il percorso (path) che i pacchetti devono eseguire. Questo è il compito del protocollo di instradamento (routing protocol) dello strato di rete. Lo scopo di ogni protocollo di instradamento è un algoritmo (l’algoritmo di instradamento) che determina il percorso del pacchetto, questo percorso deve essere un “buon” percorso, cioè è quello che ha il “minimo costo”. Viene usata un’astrazione grafica delle reti per formulare gli algoritmi. Adesso bisogna trovare il percorso a costo più basso da una sorgente a una destinazione tramite una serie di link:
+    • Il primo link sul percorso sia collegato alla sorgente;
+    • L’ultimo link sul percorso sia collegato alla destinazione;
+    • Per tutti gli i, i link i e (i-1) -esimo sul percorso siano collegati allo stesso nodo;
+    • Per il percorso di minor costo, la somma dei costi dei link sul percorso è la minima tra quelle di tutti i percorsi possibili.
+Classificazione degli algoritmi di instradamento:
+    • Algoritmo di instradamento globale (global routing algorithm): calcola il percorso di minor costo fra s e d usando conoscneze sulla rete complete, globali. A questi algoritmi ci si riferisce come algoritmi basati sullo stato dei link (link state algorithm), poiché l’algoritmo deve essere a conoscenza  del costo di ciascun link nella rete.
+    • Algoritmo di instradamento decentralizzato (decentralized routing algorithm): il calcolo del percorso di mino costo è eseguito in modo interattivo distribuito. Nessun nodo ha informazioni complete sul costo di tutti i link della rete.piuttosto, ogni nodo comincia con la sola conoscenza del costo dei link a esso direttamente collegati. Un nodo calcola gradualmente il percorso di mino costo. Un algoritmo di questo tipo è l’algoritmo distance vector (algoritmo vettore delle distanze).
+Un secondo modo generico per classificare gli algoritmi è:
+    • Statici  i path cambiano molto lentamnte nel tempo.
+    • Dinamici  i path vengono modificati i percorsi di instradamento non appena varia il carico di traffico in rete o la topologia. Questi algoritmi sono più reattivi alle variazioni nella rete e sono più suscettibili a problemi come routing loop e oscillazioni nei percorsi.
+Un terzo modo di classificarli è:
+    • Sensibili al carico (load-sensitive): i costi dei link vaariano dinamicamente per riflettere lo stato attuale di congestione del link in questione.
+    • Insensibili al carico (load-insensitive): i costi dei link non variano secondo la congestione della rete.
+
+4.2.1	ALGORITMO DI INSTRADAMENTO BASATO SULLO STATO DEI LINK – LINK-STATE ROUTING ALGORITHM
+La topologia della rete e tutti i costi dei link sono noti, cioè disponibili come input dell’algoritmo.
+L’algrotimo di Dijkstra: clacola il percorso di minor costo da un nodo (la sorgente, che chiameremo A) a tutti gli altri nodi nella rete. È un algoritmo iterativo e ha la prorpietà che dopo la k-esima iterazione esso conosce il percorso di minor costo per k nodi di destinazione.
+Nozioni:
+    • c(i,j): costo del link dal nodo i al nodo j. Se i nodi i e j non sono collegati direttamente, allora c(i,j)=∞. Per semplicità assuiamo che c(i,j) = c(j,i).
+    • D(v): costo del percorso dal nodo sorgente al nodo di destinazione v.
+    • p(v): i nodo precedente (collegato a v) lungo il percorso attuale di minor costo dalla sorgente a v.
+    • N: gruppo di nodi il cui percorso di minor costo  conosciuto definitivamente dalla sorgente.
+Il numero di loop è uguale al numero di nodi nella rete. Utilizziamo il grafico di sopra e applichiamo l’algoritmo per calcolare i percorsi di minor costo da u a tutte le possibili destinazioni.
+    i. Passo si inizializzazione: i percorsi di minor costo attualemnte conosciuti da u ai suoi “vicini” collegati direttamente v, w, x sono inizializzati  a 2, 5, 1 rispettivamente. I costi veerso y e z sono posti a ∞ perché non sono collegati direttamente ad u.
+    ii. Prima iterazione: consideriamo i nodi che non sono ancora stati aggiunti al gruppo N e troviamo il nodo con il più basso costo al termine della precedente iterazione. Il nodo è x, con costo 1, e allora x è aggiunto al gruppo N. Viene aggiornato D(v) per tutti i nodi v. Il costo verso v rimane invariato. Il costo del percorso verso w (inizizlizzato a 5) passando per il nodo x diventa 4. Allo stesso modo, il csoto verso y (attraversato x) è calcolata pari a 2.
+    iii. Seconda iterazione: i nodi v e y hanno il minor costo (2), decideremo in modo arbitrario di aggiungere y al gruppo N. N contiene uxy. E così via….
+La complessità computazionale di questo algoritmo è O(n²).
+Quando il costo dei link dipende dal volume del traffico abbiamo una possibile oscillazione. Una soluzione che può essere adottata è di evitare che tutti i router mettano in funzione l’algoritmo nello stesso momento.
+
+
+
+4.2.2	ALGORITMO DI INSTRADAMNENTO DISTANCE VECTOR
+È un algoritmo:
+    • Iterativo: perché il processo continua finché non viene più scambiata alcuna informazione tra i vicini.
+    • Asincrono: perché non richiede a tutti i nodi di operare con sincronismo tra loro.
+    • Distribuito: perché ciascun nodo riceve alcune informazioni da uno o più “vicini” ai quali è direttamente collegato, esegue un calcolo, e può quindi distribuire i risultati del suo calcolo indietro ai suoi vicini.
+La principale struttura dell’algoritmo è la tabella delle distanze mantenuta in ciascun nodo. Ha una riga per ogni nodo. Consideriamo un nodo x che è interessato all’instradamento alla destinazione y attraverso il suo vicino z, con cui è collegato direttamente. Abbiamo una voce nella tabella che è  del nodo x è la somma dei costi del link diretto a un salto fra x e z (c(x,z)), più il percorso attualmente conosciuta di minor costo del vicino z da se stesso a y:
+(x,y) = c(x,y) + min{(y,w)}
+Il termine min è calcolato su tutti i vicini direttamente collegati a z.
+Questo algoritmo è decentralizzato e non impiega informazioni globali.
+
+Variazione dei costi dei link:
+Quando un nodo in cui funziona l’algoritmo DV rileva una variazione nel costo del link fra se stesso e un vicino, esso aggiorna la tabella delle distanze, e se interviene una variazione nel costo del percorso di minor costo, aggiorna i suoi vicini. Possiamo avere un problema di “conteggio infinito”.
+
+Confronto tra algortimo di instradamento dello stato del link (LS) e DV:
+    • Complessità del messaggio: l’algoritmo LS necessità che ciascun nodo conosca il costo di ciascun link nella rete, questo richiede la spedizione di O(nE) messaggi, dove n è il numero di nodi nella rete ed E è il numero di link. L’algoritmo DV richiede per ciascun iterazione lo scambio dei messaggi fra vicini direttamente collegati. Abbiamo visto che il tempo può dipendere da diversi fattori.
+    • Velovità di convergenzai: LS è O(n²) che richiede O(nE) messaggi, e che potenzialmente soffre di oscillazioni. DV può convergere lentamente e può avere percorsi ciclici durante la convergenza, e soffre anche del problema di conteggio all’infinito.
+    • Robustezza: cosa succede se il router si guasta o funziona male? Per LS, un router può trasmettere un costo incoerente per uno dei link a esso attaccati. Ma un nodo LS calcola solo la proprio tabella di instradamento; gli altri nodi fanno il calcolo per se stessi. Il che significa che i calcoli vengono fatti in modo separato e questo fornisce un certo grado di robustezza. Per DV, un nodo può notificare percorsi di minor costo sbagliati verso qualsiasi/tuttte le destinazioni. Quindi con DV un calcolo sbagliato di un nodo può essere diffuso attraverso lintera rete.
+
+4.3	INSTRADAMENTO GERARCHICO
+Questo modello e la sua visione di un gruppo omogeneo di router, che eseguono tutti lo stesso algoritmo, è un po' semplicistica per almeno due motivi importanti:
+    • Scala  all’aumentare del numero dei router, l’overhead (carico aggiuntivo) dell’esecuzione dei calcoli, dell’immagazzinamento e della comunicazione delle informazioni della tabella di instradamento diventa proibitivo. Un algoritmo DV che itera fra un così grande numero di router non convergerebbe mai.
+    • Autonomia amministrattiva  idealmente una società dovrebbe essere in grado di far funionare e amministrare la sua rete come vuole, e nello stesso tempo dovrebbe riuscire anche a collegare la sua rete ad altre reti “esterne”.
+Entrmabi i problemi possono essere risolti con l’aggregazione di router in regioni o sistemi autonimi (AS). I router all’interno dello stesso AS avranno tutti lo stesso algoritmo di instrdamento e si scambieranno informazioni tra loro. L’algortimo di instrdamento che funziona all’interno di un sistema autonimo è detto protocollo di instradamento intra-sistema autonimo. Sarà necessario, collegare gli AS tra loro, e quindi uno o più router in un AS dovrà avere il compito aggiuntivo di essere responsabile di instradare i pacchetti alla destinazione esterna all’AS: questi router sono detti router gateway. Poiché questi router possano instradare i pacchetti da un AS a un altro, i gateway devono sapere come effetturare l’instrdamento fra loro. L’algoritmo di instradamento che i gateway usano per l’indirizzazmento fra i diversi AS è detto protocollo di instradamento inter-sistema autonomo.
+Speciali router gateway nei diversi AS hanno un protocollo di instradamento inter-sistema che determina i percorsi di instradamento gli AS. Il problema di scala è risolto, perché un router intra-AS necessita solo di conoscere i router all’interno del suo AS e il/i router gateway del suo AS. Il problema dell’autorità amministrativa è risolto, poiché una società può far funzionare qualsiasi protocollo di instradamento voglia intra-AS, finchè il/i gateway dell’AS è/sono in grado di far funzionare un protocollo interno all’AS che può collegare l’AS estesso con gli altri.
+Nella figura ci sono tre AS di instradamento, A, B e C. Il sistema autonomo A possiede quattro router, A.a, A.b, A.c e A.d, in cui funziona il protocollo di instradamento -AS adottato all’interno del sistema autonomo A. questi quattro router hanno informazioni complete sui percorsi di instradamento all’interno del distema autonomo A. In modo analogo, i sistemi autonomi B e C hanno tre e due router. I protocolli di instradamento intra-AS che funzionano all’interno di A, B e C non necessariamente sono gli stessi. I router gateway sono A.a, A.c, B.a e C.b. Oltre a far funzionare i protocolli di instrdamento intra-AS insieme agli altri router dei loto AS, questi quattro fanno funzionare tra loro un protocollo di instradamento inter-AS. La loro topologia è illustrata al livello più alto. Un link per lo strato più alto potrebbe essere un link fisico reale, per esempio il link che collega A.c e B.a, o un link logico, come nel caso del link tra A.c e A.a. Viene anche mostrato che il router gateway A.c deve far funzionare sia un protocollo di instrdamento intra-AS con i suoi vicini A.b e A.d, sia un protocollo inter-AS con il router gateway B.a. Infatti le voci nella tabella di inoltro del router A.c sono derivate da entrambi i protocolli intra- e inter-AS.
+
+Supponiamo ora che un host H1 collegsto al router A abbia necessità di instradare un pacchetto alla destinazione H2 nel sistema autonomo B. assumiamo che la tabella di inoltro di A.d indichi che il router A.c è responsabile per l’instrdamanto di questo pacchetto (di A.d) all’interno dell’AS, il pacchetto è prima instradato da A.d a A.c usando il protocollo intra-AS di A. il router A.c riceverà il pacchetto e vedrà che è destinato a un sistema autonomo esterno ad A. la tabella di inoltro di A.c per il protocollo inter-AS indicherà che un pacchetto destinato al sistema autonomo B dovrà essere instrdato lungo il link da A.c a B.a. Quando il pacchetto arriva a B.a, l’instradamento inter-AS di B.a vede che il pacchetto è destinato al sistema autonomo B. Il pacchetto arriva al protocollo di instradamento intra-AS all’interno di B, che instrada il pacchetto alla destinazione finale, H2.
+
+4.5	INSTRADAMENTO IN INTERNET
+Guardiamo i protocolli di instradamento (routing) di internet, la loro funzione p di determinare il percorso eguito da un datagram dalla sorgente alla destinazione. Un gruppo di router che sono sotto lo stesso controllo tecnico e amministrativo, e fra i quali funziona lo stesso protocollo di instradamento, è conosciuto come sistema autonomo AS. Ciascun AS è tipicamente composto da più reti.
+
+4.5.1 INSTRADAMENTO INTRA-SISTEMA AUTONOMO IN INTERNET: RIP O OSPF
+Per l’instradamento all’interno di un sistema autonomo in Internet sono stati largamente usati deu protocolli:
+    A. RIP (routing information protocol): è stato uno dei primi protocolli per l’instrdamento intra-AS. È un protocollo distance vector. Le tabelle di instradamento vengono scambiate tra i vicini ogni 30 sec, usando un messaggio di replica del RIP, conosciuti anche come avvisi del RIP. Di interesse è l’instradamento di default, cioè datagram IP che non è destinato a una delle reti elencate nella tabella di instradamento sarà inoltrato al router con idirizzo IP 193.55.114.129.
+    B. OSPF (open shorterst path first): è usato per l’instradamento intra-AS. “Open” indica che le specifiche del protocollo di instradamento sono disponibili al pubblico. Era concepito come sucessore del RIP. È basato sullo stato dei link che usa il flooding (inondazione) delle informazioni sullo stato dei link e un algoritmo di Dijkstra per il percorso di minor costo. Con l’OSPF, un router costruisce una mappa topologica completa ( un grafo orientato) dell’interno sistema autonomo. Il router mette in funzione localmente l’algortimo di Dijkstra per il percorso di costo minimo per determinare l’albero dei percorsi più corti verso tutte le reti considerando se stesso come nodo radice. OSPF non impone una politica per come devono essere impostati i pesi dei link, ma invece fornisce i meccanismi per determinare l’instradamento sul percorso a minimo costo per un dato insieme di pesi dei link. Sicurezza  tutti gli scambi tra router OSPF sono autenticati.
+
+4.5.2	INSTRADAMENTO INTER-SISTEMI AUTONOMI: BGP
+Il protocollo border gateway è un protocollo per l’instradamento inter-dominio nell’Internet attuale. Fornisce l’instradamento fra sistemi autonomi (AS). BGP è usato per determinare i percorsi verso le destinazioni che sono al di fuori di AS2(inter), mentre OSPF è utilizzato per determinare i percorsi verso le destinazioni all’interno di AS2.
+BGP è un protocollo path vector (vettore di percorsi). Perché i router confinanti, noti come pari BGP, si scambiano informazioni dettagliate sui percorsi piuttosto che informazioni sui costi …. Scheda
+
+CAPITOLO 5
+Continuando a scendere lungo la pila protocollare, dallo strato di rete a quello di collegamento, ci chiediamo come i pacchetti vengono inviati lungo i singoli link nel percorso di comunicazione da estremo a estremo.
+Analizzando lo strato di collegamento, troveremo due diversi canali: 1. Canali broadcast (reti di area locale – LAN, nelle LAN wireless, nelle reti satellitari), 2. Link di comunicazione da punto a punto (tra due router, router residenziale commutato e uno di un ISP).
+
+
+
+
+
+5.1 – 5.1.1 I SERVIZI FORNITI DALLO STRATO DI COLLEGAMENTO
+Host e router verranno chiamati nodi. E i canali di comunicazione che connettono i nodi adiacenti lungo il percorso di comunicazione saranno indicati come link. Per muovere un datagram su un percorso si usa protocollo dello strato di collegamento (link-layer protocol). Le unità di dati scambiati da questo strato sono dette frame (trame) e ogni frame dello strato di collegamento incapsula un datagram dello strato di rete.
+Esempi di protocolli dello strato di collegamento sono: Ethernet, LAN wireless 802.11, tokern ring e PPP. In molti contesti anche ATM e frame relay possono essere protocolli dello strato di collegamento.
+il lavoro di spostamento dello strato è node-to-node su un singolo link, non più end-to-end.
+Servizi offerti da un protocollo dello strato di collegamento:
+    • Framing (incoriciatura): incapsulano ogni datagram dello strato di rete all’interno di un frame prima dello trasmissione sul link.
+    • Acesso al link: un protocollo di controllo di accesso al mezzo (MAC) specifica le regole di trasmissione di un frame sul link.
+    • Recapito affidabile: un servizio di recapito affidabile (reliable delivery), esso garantisce di muovere senza errori attraverso il link ogni datagram. Questo servizio spesso viene usato per quei link che sono soggetti ad alti tassi di errori, con l’obiettivo di correggere locamente gli errori.
+    • Controllo del flusso: i nodi da ciascun lato di un link hanno limitata capacità di buffering per i frame, e senza un controllo il buffer potrebbe saturarsi e i frame venir scartati.
+    • Ricerca di errori: un nodo receiver può valutare erronemante che un bit in un frame è zero mentre al moemento della trasmissione era uno o viceversa.
+    • Correzione degli errori: un receiver può determinare sia se è stato introdotto un errore nel frame sia dove esattamente l’errore si è verficato.
+    • Half-dupex e full-duplex: con il full i nodi a entrambe le estremità possono trasmettere contemporaneamente, con la half un nodo non può riceve e trasmettere nello stesso tempo.
+
+5.2 TECNICHE DI RILEVAZIONE E CORREZIONE DEGLI ERRORI
+La ricerva e la correzione degli errori avviene a livello di bit. Questo servizio non è offerto solo dallo strato di collegamento ma anche da quello di trasporto.
+Esamineremo tre tecniche di rilevare gli errori:
+    1. Bit di parità (parity bit)
+    2. Metodi di checksum
+    3. Controllo a ridondanza ciclica – CRC
+
+5.3	PROTOCOLLI DI ACCESSO MULTIPLO
+Abbiamo due tipi di link di rete: link punto-a-punto e link broadcast.
+Link punto a punto  consiste di un singolo sneder a un’estremità del link e di un singolo receiver all’altra estremità. (PPP e HDLC).
+Link broadcast  può avere più nodi di spedizione e di ricezione tutti collegati allo stesso, singolo, canale broadcast condiviso. Si usa il termine broadcast perché quando un nodo trasmette un frame, il canale lo diffonde e ciascuno degli altri nodi ne riceve una copia (Ethernet e LAN wireless). Devono funzionare senza che avvenga collisione.
+Le reti di calcolatori hanno dei protocolli, i protocolli di accesso multiplo (multiple access channel - MAC) attraverso i quali i nodi regolano le loro trasmissioni sul canale broadcast condiviso.
+Classificazione dei protocolli di accesso multiplo: protocollo di suddivisione del canale, protocollo di accesso casuale e protocollo a turno.
+
+5.3.1	PROTOCOLLI DI SUDDIVISIONE DI CANALE
+    • Il TDMA (time division multiple access) divide il tempo in intervalli o frame di tempo e poi divide ciascun frame in N blocchi o slot di tempo. Ogni slot è assegnato a uno degli N nodi. Ogni volta che un nodo ha un frame da spedire, esso trasmette i bit del frame durante lo slot di tempo a esso assegnato nel frame TDMA a rotazione. Le dimensioni del fraame sono scelte in modo che durante uno slot di tempo possa essere trasmesso un singolo frame. Inconvenienti (1) un nodo è limitato a una velocità media R/N bit/s, (2) un nodo deve sempre aspettare il suo turno nella sequenza di trasmissione.
+    • FDMA (frequency division multiple access) divide il canale a R bit/s in differenti frequenze (ciscuna con lunghezza di banda R/N) e assegna ciascuna frequenza a uno degli N nodi. Vengono quindi creati N canali più piccoli di R/N bit/s partendo dal singolo canale di R bit/s. L’FDMA evita le collisioni e divide equamente il canale, ma è costretto a una lunghezza di banda fissa.
+ Accesso multiplo a divisione del codice (CDMA) è un protocollo di suddivisione del canale. Il CDMA assegna un codice diverso a ciascun nodo, e ogni nodo usa il suo codice unico per codificare i bit di dati che spedisce. Il CDMA permette a diversi nodi di trasmettere simultaneamnte con i rispettivi receiver che ricevono correttamente i bit di dati codificati dal sender (assumento che receiver conosca codice del sender) malgrado l’interfernza degli altri nodi. Ogni bit spedito dal sender è codificato moltiplicando il bit per un segnale (il codice) che cambia a velocità superiore (chipping rate, ritmo di chip) a quella della sequenza originale dei bit di dati.
+
+5.3.2	PROTOCOLLO DI ACCESSO CASUALE
+Un nodo trasmittente invia sempre alla massima velocità del canale, cioè R bit/s. quando si verifica una collisione, ogni nodo in essa coinvolto ritrasmette ripetutamente il suo frame finghè questo passa senza collisione. Ma quando avviene la ritrasmissione essa non avviene necessariamente subito, ma un frame aspetta per un ritardo casuale (random delay); per ogni nodo che ha subito una collisione, esso sceglie il ritarado casuale in modo indipendente.
+Protocolli ad accesso casuale MAC:
+Slotted ALOHA  nella descrizione di ALOHA assumiamo che: (i) tutti i frame sono di L bit; (ii) il tempo è suddiviso in slot di dimensioni L/R secondi; (iii) i nodi cominciano la trasmissione dei frame solo all’inizio degli slot; (iv) i nodi sono sincronizzati in modo che ciascuno conosca quando iniziano gli slot; (v) se in uno slot due o più frame collidono, allora i nodi rilevano l’evento prima del termine dello slot.
+p = probabilità, cioè un numero tra 0 e 1.
+Il funzionamento dello slotted ALOHA in ciascun nodo è semplice.
+    • Quando il nodo ha un nuovo frame da spedire, aspetta fino all’inizio dello slot successivo e trasmette l’intero frame nello slot.
+    • Se non si verifica collisione, il nodo ha trasmesso con successo il suo frame e non deve effettuare una ritrasmissione. Il nodo può preparare un nuovo frame per la trasmissioe, se ne ha uno.
+    • Se si verifica una collisione, il nodo rileva la collisione prima del termine dello slot. Il nodo ritrasmette il suo frame in ciascuno slot successivo con probabilità p finchè il frame è trasmesso senza collisioni.
+Vataggi: permette a un singoolo nodo di trasmettere continuamente frame alla massima velocità R, è decentralizzato (dato che ogni nodo rileva le collisioni e decide indipendentemente la ritrasmissione), molto semplice.
+Svantaggi: problemi di efficienza quando i nodi attivi (se ha frame da spedire) sono molti.
+C’è anche un ALOHA puro, privo di slot.
+CSMA – carrier sense multiple access (accesso multiplo a rilevazione di portante) e CSMA/CD (CSMA con collison detection)
+Questi due protocolli hanno due regole importanti (1) ascoltare prima di parlare, nel mondo delle reti è detto rilevazione di portante: un nodo ascolta il canale prima di trasmettere, se il canale è occupato il nodo aspetta un tempo casuale dopo di che ascolta di nuovo il canale. Se questa volta è libero trasmette, in caso contrario il nodo aspetta di nuovo un intervallo di tempo casuale e ripete il processo. (2) rilevazione di collisione, un nodo che sta trasmettendo ascolta il canale mentre trasmette, arresta la sua trasmissione e impiega qualche protocollo per determinare il momento in cui può ricominciare.
+ CSMA: ma se tutti i nodi eseguono la rilevazione di portante perché si possono verificare collisioni? Esiste un ritardo end-to-end di protapagazione del canale per un canale broadcast. Meaggiore è il ritardo, maggiore è la possibilità che un nodo a rilevazione di portante non sia in grado di rilevare una trasmissione che è già cominciata da parte di un altro nodo della rete.ù
+
+5.3.3	PROTOCOLLI A TURNO – take turns MAC protocols
+Ha due proprità, (1) quando uno slot nodo è attivo, esso edve avere un throughput di R bit/s (come ALOHA  e CSMA); (2) quando sono attivi M nodi, ciascuno di essi deve avere un throughput vicino a R/M bit/s.
+Tratteremo due protocolli :
+Polling protocol (protocollo di sondaggio)
+Richiede che uno dei nodi sia designato come nodo master (principale). Il nodo master sonda a rotazione ciascuno dei nodi e prima invia un messaggio al nodo 1, dicendogli che può trasmettere un certo numero massimo di frame. Dopo che il nodo 1mha trasmesso alcuni frame, il master avvia il 2 che può trasmettere un certo numero massimo di frame. La procedura prosegue i questo modo, con il nodo master che sonda tutti fli altri in modo ciclico. Elimina le collisioni e gli slot vuoti, questo gli permette di avere un efficienza più alta. Un inconveneinte è che viene introdotto un ritardo di sondaggio.
+Protocollo a passaggio del testimone/gettone (token-passing protocol)
+Non esiste nodo master. Un piccolo frame per scopi speciali, conosciuto come token (gettone), è scambiato fra i nodi in un ordine prefissato. Ad esempio, il nodo 1 deve sempre spedire il token al nodo 2, il 2 al 3, l’N all’1. Quando un nodo riceve un token, esso lo trattiene solo se ha qualche frame da trasmettere; altrimenti  lo inoltra immediatamente al nodo successivo. Se quando riceve il token un nodo ha frame da trasmettere, esso trasmette il numero massimo consentito di frame e successivamente inoltra il token al nodo successivo. Il passaggio del token è decentralizzato e ha un’alta efficienza. Problema: il guasto di un nodo può mettere fuori servizio l’intero canale.
+
+5.3.4	RETI DI AREA LOCALE – LAN
+È una rete di calcolatori concentrata in un’area geografica. Quando un utente accede a Internet da un univesità o da un campus collegato, l’accesso avviene quasi sempre attraverso una LAN. Per questo tipo di accesso a Internet, l’host dell’utente è un nodo sulla LAN e la LAN fornisce l’accesso a Internet attraverso un router. La Lan costituisce un singolo “link” fra ciascun host dell’utente e il router; si usa quindi un protocollo dello strato di collegamento, parte del quale è un protocollo di accesso multiplo.
+Due classi:
+    1) LAN Ethernet, basato sull’accesso casuale.
+    2) Passaggio del token, compresa la token ring e la FDDI.
+
+5.4	INDIRIZZI LAN E ARP
+I nodi nelle LAN si scambiano frame su canale broadcast, il che significa che quando un nodo trasmette un frame, ciascun nodo della LAN lo riceve. Di solito però un nodo delle LAN vuole inviare frame solo ad alcuni particolari nodi e non a tutti. E per prevenire questo i nodi devono avere un indirizzo LAN e i frame dello strato di collegamento richiedono la presenza di un campo per contenere questi indirizzi di destinazione. Così quando un nodo riceve un frame, può determinare se era destinato a lui o a un altro nodo nella LAN.
+    • Se il frame appartiene al nodo, il nodo estrae il datagram dello strato di rete dal frame dello strato di collegamento e lo passa verso l’alto nella pila protocollare.
+    • Se invece l’indirizzo di detinazione non corrisponde al quello del nodo, il nodo scarta il frame.
+
+5.4.1	INDIRIZZI LAN
+Non è un nodo ad avere un indirizzo LAN ma è l’adattatore del nodo a possederlo. Un indirizzo LAN è anche detto indirizzo fisico, indirizzo Ethernet o indirizzo MAC (media access control). L’indirizzo ha 6 byte, il che permette  indirizzi LAN. Sono espressi in notazione esadecimale, con ciascun byte dell’indirizzo espresso come una coppia di numeri esadecimali. L’indirizzo LAN di un adattatore è permanente, dato che viene incorporato nella sua ROM, e non esistono due adattatori con lo stesso indirizzo. La gestione dello spazio fisico degli indirizzi su scala globale è affidata all’IEEE.
+Un indirizzo LAN ha una struttura orizzontale, l’opposto di una struttura gerarchica (come per gli indirizzi IP).
+A volte un adattatore che spedisce vuole che gli altri adattatori sulla LAN ricevano e processino (senza scartarlo) il frame che sta inviando. In questo caso l’adattatore che spedisce inserisce uno speciale indirizzo di broadcast nel campo dell’indirizzo di destinazione del frame, è una stringa di 48 1 consecutivi (FF-FF-FF-FF-FF).
+
+
+
+5.4.2	PROTOCOLLO PER LA RISOLUZIONE DELL’INDIRIZZO
+Poiché esistono sia indirizzi dello strato di rete (indirizzi IP di Internet) sia indirizzi dello strato di collegamento (LAN) tra loro c’è necessità di conversione. Per Internet, questo lavoro è affidato al protocollo per la risoluzione dell’indirizzo (ARP, address resolution protocol). Qualsiasi host di Internte e ogni router su una LAN possiedono un modulo ARP.
+Supponiamo che il nodo con indirizzo IP 222.222.222.220 voglia spedire un datagram IP al nodo 222.222.222.222. per fare questo il nodo che spedsce deve dare al suo adattatore non solo il datagram ma anche l’indirizzo LAN del nodo dest. Il nodo che spedisce trova l’indirizzo LAN del nodo dest fornendo al suo modulo ARP l’indirizzo IP del nodo dest. L’ARP allora risponde con il corrispondente indirizzo LAN, cioè 49-BD-D2-C7-56-2A. vediamo quindi che il modulo ARP traduce un indirizzo IP in uno LAN.
+Il nodulo ARP di ciascun nodo ha una tabella nella sua RAM, chiamata tabella ARP, che contiene la correlazione tra gli indirizzi IP e gli indirizzi LAN. Per ogni corrispondenza di indirizzi la tabella contiene anche una voce tempo di vita (TTL, time of life) che indica quando la voce sarà eliminata dalla tabella. Un TTL tipico di solito è di 20 min.
+Ma cosa succede se al momento la tabella ARP non ha la voce cercata? Il nodo che spedisce usa il protocollo ARP per convertire l’indirizzo. Poi costruisce un paccheto ARP, cioè un pacchetto che ha molti campi tra cui quelli di indirizzi IP e LAN di chi spedisce e chi riceve, il suo scopo è di chiedere a tutti gli altri nodi della LAN di determinare l’indirizzo LAN corrispondendente all’indirizzo che deve essere risolto. Quindi il nodo 222.222.222.220 passa all’adattatore un pacchetto di richiesta ARP insieme all’indicazione che l’adattatore dovrebbe inviare il pacchetto all’indirizzo broadcast della rete, FF-FF-FF-FF-FF. L’adattatore incapsula il pacchetto ARP in un frame di collegamento, e trasmette nella LAN. Ogni nodo controlla se il suo indirizzo IP corrisponde a quello di destinazione indicato nel pacchetto ARP e l’unico nodo che ha l’indirizzo corrispondente invia la nodo richiedente un pacchetto di risposta ARP con la correlazione desiderata e così il nodo richiedente può aggiornare la sua tabella ARP e inviare il suo datagram IP.
+
+Inviare un datagram  a un nodo esterno alla LAN
+Esterno alla LAN, cioè su un'altra rete IP. Ci sono due tipi di nodi: host e router. Ogni host ha esattamente un indirizzo IP e un adattatore. Ma un router ha un indirizzo IP per ciascuna delle sue interfacce. E ogni interfaccia ha anche il proprio modulo ARP  e il suo adattatore. Nel nostro esempio il router ha due interfaccie e quindi due indirizzi IP, due moduli ARP e due adattatori (con il prorpio indirizzo LAN).
+Router  111.111.111.xxx e 222.222.222.xxx, i primi tre byte dell’indirizzo IP specificano la “rete”, mentre gli ultimi byte identificano la specifica interfaccia all’interno della rete.
+Supponimao che host A vuole inviare un datagram IP all’host B. L’host A passa il datagram al suo adattatore, ma deve anche indicare al suo adattatore un indirizzo LAN di dest. Affinchè il datagram vada nella LAN 2, deve prima essere spedito all’interfaccia del router 111.111.111.110. La tabella di inoltro dell’host A indicherà che per raggiungere l’host B, il datagram deve prima essere inviato all’interfaccia 111.111.111.110 del router. Quindi il giusto indirizzo LAN per il frame è quello del router, cioè E6-E9-00-17-BB-4B (lo acquisisce tramite l’uso dell’ARP). Il datagram IP si sposta dall’host al router. A questo punto viene consulatato la tabella di inoltro nel router, ed essa dice che il datagram deve essere inoltrato attraverso l’interfaccia 222.222.222.220. Questa interfaccia passa quindi il datagram al suo adattore, che lo incapsula in un nuovo frame e lo invia nella LAN 2.
+
+5.5	ETHERNET
+Oggi Ethernet è a tecnologia LAN prevalente. È stata la prima LAN ad alta velocità applicata in modo diffuso. Costava poco ed era poco complessa, rispetto ad altre tecnologie.
+
+5.5.1	LE BASI DI ETHERNET
+Una LAN Ethernet può avere una topologia a bus o a stella e può funzionare su cavo coassiale, doppione telefonico o fibre ottiche. Inoltre può trasmettere dati a tassi differenti: 10 Mbit/s, 100 Mbit/s, 1 Gbit/s, 10 Gbit/s ecc.
+Strutture del frame di Ethernet
+- Campo dati: contiene il datagram IP, l’unità massima trasferita (MTU) è di 1500 byte.
+- Indirizzo di destinazione: contiene indirizzo LAN dell’adattatore di detinazione.
+- Indirizzo sorgente: contiene indirizzo LAN dell’adattatore che trasmette il frame.
+- Campo tipo: permette a Ethernet di multiplare i protocolli dello strato di rete.
+- Controllo di ridondanza ciclica (CRC):  permette all’adattatore che riceve di rilevare se un qualcunque errore è stato inserito nel frame, cioè se i bit nel frame sono stati cambiati.
+- Preambolo: il frame di Ethernet comincia con un preambolo di 8 byte. I primi sette servono per “svegliare” gli adattatori dei receiver e per sinconizzare i loro orologi con quello del sender.
+Un servizio senza connessione non affidabile
+Tutte le tecnologie Ethernet forniscono allo strato di rete un servizio senza connessione, cioè quando A vuole inviare un datagram all’adattatore di B, esso lo incapsula in un frame Ethernet e lo invia nella LAN, senza handshake. Anche se non ci sono collisioni, un frame ricevuto può contenere errori dei bit dovuti a disturbi sul canale, per questo è un servizio inaffidabile.
+
+5.6.1	HUB
+Gli Hub sono il modo più semplice per interconnettere le LAN. Quando un bit arriva in un’interfaccia di un hub, l’hub semplicemente lo rilancia su tutte le altre interfaccie. Dato che operano su bit e non su frame, essi sono dispositivi di strato fisico. Non sono altro che ripetitori con qualche ulteriore funzionalità di gestione di rete.
+
+
+
+
+CAPITOLO 7
+Sicurezza nella rete: parleremo di Alice e Bob, due persone che vogliono comunicare e che vogliono farlo “con sicurezza”. Ma dato che parliamo di funzionamento delle reti, A e B potrebbero essere due router , un client e un server o due applicazioni di posta elettronica.
+Proprietà desiderabili per la sicurezza della comunicazione:
+    • Confidenzialità: solo se il sender e il receiver desiderano dovrebbero essere in grado di capire il contenuto del messaggio trasmesso. Ma poiché gli ascoltatori indesiderati potrebbero intercettare il messaggio, questo richiede che il messaggio sia cifrato (dati camuffati) in modo che se venga intercettato esso non possa essere decifrato (compreso).
+    • Autenticazione: entrambi sendere e receiver hanno la necessità di conferma dell’identità dell’altra parte coinvolta nella comunicazione, per essere sicuri che l’altro partecipante sia davvero chi o cosa dice di essere.
+    • Integrità del messaggio e non piudiabilità: anche se senders e receiver sono in grado di scambiarsi autenticazioni, vogliono anche avere la certezza che il contenuto delle loro comunicazioni non sia alterato nella trasmissione, sia volontariamente da altri sia per un incidente sul percorso.
+    • Disponibilità e controllo dell’accesso: un requisito fondamentale per la comunicazione sicura è che la comunicazione stessa avvenga. I “cattivi soggetti” non devono avere la possibilità di impedire che l’infrastruttura sia usata da chi è leggittimamente autorizzato a farlo. Il fatto che alcuni utenti possono essere autorizzati e altri no, porta naturalmente al controllo dell’accesso.
+Uno dei modi più sicuri per evitare che i “cattivi” possano far danni è di assicurarsi in primo luogo che i loro pacchetti non possano entrare nella propria rete.
+Firewall  è un dispositivo che è situato tra la rete che si deve proteggere (“noi”) e il resto del mondo (“i cattivi”, ”loro”). Esso controlla l’accesso a e da una rete regolamentando quali pacchetti possono attraversarlo per entrare e uscire dalla rete.
+
+7.2	PRINCIPI DELLA CRITTOGRAFIA
+Le tecniche di crittografia permettono a un sender di camuffare i dati così che un intruso non possa trarre informazione dai dati intercettati. Mentre il receivere deve essere in grado di recuperare i dati originali da quelli camuffati.
+Supponiamo che A voglia inviare un messaggio a B,  che è “i love you”; la forma originale del messaggio è chiamato testo semplice (plaintext) o testo in chiaro (cleartext). A cifra il suo testo usando un algoritmo di cifratura, in modo che il messaggio cifrato, detto testo cifrato, risulti inintellegibile a qualsiasi intruso. A fornisce una chiave Ka, una stringa di numeri o caratteri, come input all’algoritmo di cifratura. Questo algoritmo prende la chiave e il testo in chiaro del messaggio, m, come input e produce testo cifrato come output.
+La notazione Ka(m) sarà usata per far riferimento alla forma cifrata. Analogamente anche B fornirà una chiave Kb, all’algoritmo di decifratura, che prende il testo cifrato e la chiave di Bob come input e produce il testo in chiaro originale come output. Abbiamo quindi che per la decifrazione Kb(Ka(m)) = m. Nei sistemi a chiave simmetrica, le chiavi di A e B sono identiche e sono segrete. Nei sistemi a chiave pubblica si usa una coppia di chiavi. Una delle chiavi è conosciuta sia da A che da B, mentre l’altra è conosciuta o da B o da A (ma non da entrambi).
+
+7.2.1	CRITTOGRAFIA A CHIAVE SIMMETRICA
+Standard di crittografia dei dati (DES)  uno standard di cifratura a chiave simmetrica pubblica. Il DES codifica il testo in chiaro in blocchi di 64 bit usando una chiave a 64 bit. L’obiettivo del DES è “di mescolare completamente i dati e la chiave in modo che ciascun bit del testo cifrato dipenda da ciascun bit dei dati e da ciascun bit della chiave … con un buon algoritmo, non dovrebbe esserci correlazione fra il testo cifrato e i dati o le chiavi originali”.
+Funzionamento base: il DES consiste di due fasi di permutazione (il primo e l’ultimo passaggio dell’algoritmo), in cui tutti i 64 bit sono permutati e fra queste fasi ci sono 16 “cicli” uguali di operazioni. L’operazione in ciascun ciclo è identica, e prende l’output del ciclo precedente come input. Durante ciascun ciclo, i 32 bit più a destra dell’input sono spostati a costituire i 32 bit a sinistra dell’output.
+L’intero input di 64 bit e la chiave a 48 bit dell’i-esimo ciclo sono presi come input per una funzione che coinvolge l’espansione di blocchi di 4 bit in blocchi di 6 bit. Il risultante output a 32 bit della funzione è quindi usato come i 32 bit più a destra dell’output a 64 bit dell’iterazione. Il lavoro di decifratura si esegue invertendo la sequenza delle operazioni dell’algoritmo.
+
+7.2.2.	CRITTOGRAFIA A CHIAVE PUBBLICA
+La comunicazione cifrata richiede che le due parti comunicanti condividessro un segreto: la chiave simmetrica usata per cifrare e decifrare. L’uso della crittografia a chiave pubblica prevede che A e B condividano una singola chiave segreta, e B possiede due chiavi: una chiave pubblica che è disponibile a chiunque nel mondo e una chiave privata che solo B conosce.
+
+RSA : è un algoritmo di crittografia asimmetrica. Il sistema di cifratura si basa sull’esistenza di due chiavi distinte, che vengono usate per cifrare e decifrare. La questione fondamentale è che, nonostante le due chiavi siano fra loro dipendenti, non è possibile risalire dall'una all'altra, in modo che se anche si è a conoscenza di una delle due chiavi, non si possa risalire all'altra, garantendo in questo modo l'integrità della crittografia.
+Il metodo di cifratura risulta essere ancora oggi inviolato, l’efficacia di tale algoritmo non consiste nella segretezza del modo in cui è implementato (il procedimento è conosciuto) ma nella difficoltà di invertire l’algoritmo in tempi accettabili ovvero sull’elevata complessità computazionale della fattorizzazione in numeri primi.
+Per ottenere una discreta sicurezza è necessario utilizzare chiavi binarie di almeno 2048 bit.
+Procedura:
+- Chiave Pubblica, formata da 2 numeri (n,e)  -Chiave Privata, formata da 2 numeri (n,d).
+1. Si scelgono due numeri primi (p,q) abbastanza grandi. Si calcola il loro prodotto chiamato anche modulo n=pq (ovviamente la fattorizzazione è segreta) e si pone z =(p-1)(q-1). (La funzione z coincide con la funzione di Eulero quando n è il prodotto di due numeri primi, tale funzione associa a un numero intero n il numero dei numeri interi co-primi con n e minori di n compreso l’uno. Se n è un numero primo z(n) =n-1).
+2. Si sceglie poi un numero e chiamato esponente pubblico, coprimo con z e più piccolo di z stesso (e non deve necessariamente essere primo).
+3. Si sceglie il numero d chiamato esponente privato tale che il suo prodotto con e sia congruo a 1 mod(z), cioè 𝐝 ∙ 𝐞 ≡ 𝟏 𝐦𝐨𝐝(𝐳)
+La forza dell’algoritmo è che per calcolare d ed e non basta conoscere n ma si deve conoscere anche z e fattorizzarlo in fattori primi richiede molto tempo.
+
+Un messaggio M viene cifrato attraverso l’operazione M^e (mod n) trasformandolo nel messaggio cifrato c. Una volta trasmesso c viene decifrato con c^d ≡ 𝐌 (mod n). Il procedimento funziona solo se la chiave pubblica e e quella privata d sono legate dalla relazione 𝑑 ∙ 𝑒 ≡ 1 (𝑚𝑜𝑑 𝑧). Quindi quando un messaggio viene cifrato con una chiave può essere decifrato solo con l’altra e viceversa.
+
+7.3	AUTENTIFICAZIONE
+È il processo che prova l’identità di qualcuno a qualcun altro. Qui analizziamo l’autentificazione di una parte “viva”, che avviene in un momento del tempo in cui la comunicazione efferrivamente è in atto.
+Quando si esegue l’autentificazione sulla rete, le parti comunicanti non possono scambiarsi informazioni biometriche, ma deve essere eseguita solo sulla base dei messaggi e dei dati scambiati come parte di un protocollo di autentificazione. Questo protocollo deve funzionare prima che le due parti comunicanti azionino qualsiasi altro protocollo. Il protocollo di comunicazione prima stabilisce l’identita delle parti.
+ ap (authenticazion protocol):
+    • ap1.0: in cui A invia un messaggio a B dicendo semplicemnte che lei è A.
+    • ap2.0: nel caso in cui A abbia un idirizzo di rete conosiuto (per esempio l’indirizzo IP) dal quale lei comunica sempre, B può tentare di autenticare A verificando che l’indirizzo sorgente sul datagram IP che trasporta il messaggio di autenticazione corrisponda all’indirizzo noto di A. se è così, A sarà autenticata.
+    • ap3.0: approccio in cui si utilzza una password segreta. Nel protocollo ap3.0, A invia quindi la sua password segreta a B. Non è un protocollo molto sicuro dato che se Trudy intercetta la comunicazione di A, essa può scoprire la sua password.
+    • ap3.1: usare la cifrafratura per la password, così Trudy non potrà scoprirla. Supponiamo che A e B condividano una chiave simmetrica segreta Ka-b, A può cifrare la password e inviare a B il suo messaggio di identificazione e la sua password cifrata. B decifra la password e, supponendo che sia corretta, autentifica A. Questo non risolve il problema dell’attacco di replica: Trudy deve solo inserirsi nella comunicazione di A, registrare la versione cifrata della chiave e successivamente riprodurla e iniarla a B per sostenere di essere A.
+    • ap4.0: B non è in grado di distinguere fra l’autenticazione originale di A e la successiva riproduzione della stessa, cioè B non può dire se A era “viva” o se i messaggi che stava ricevendo erano una riproduzione registrata di una precedente autenticazione di A. Per provare questo A manda un nonce, cioè un numero che un protocollo userà solo una volta in un tempo di vita, cioè una volta che un protocollo ha usato un nounce non lo userà mai più.
+    • ap5.0:….
+
+7.4	INTEGRITà
+Prorpio come nelle firme tradizionali, la firma digitale deve essere fatta in modo che essa sia verificabile, non falsificabile e non ripudiabile, cioè essa deve rendere possibile “provare” che un documento firmato da un individuo sia davvero firmato da quell’individuo (verificabile) e che solo quell’individuo può aver firmato il documento (non deve essere falsificabile). Questo si può ottnere con la crittografia a chiave pubblica.
+Ma data la ridondanza di cifratura e decifratura, la firma dei dati dati attravero di essa può costituire un trattamento eccessivo. Un approccio più efficiente è quello che usa i digest del messaggio.
+Un digest del messaggio equivale per molti aspetti a una checksum. Questo algoritmo prende il messaggio m, di lunghezza arbitraria e calcola una “impornta digitale” di lunghezza fissa dei dati, conosciuta come digest del messaggio, H(m). Il digest del messaggio protegge i dati, nel senso che se m viene cambiato in m’, allora l’H(m), calcolato sui dati originali, non corrisponderà all’H(m’), calcolato sui dati cambiati. Digest di messaggio e checksum sono dette funzioni hash.
+Funzione hush: prende un input, m, e calcola una stringa di lunghezza fissa conosciuta come hash. Le checksum di Internet, i CRC e i digest del messaggio corrispondono a questa definizione.
+Se il firmare il digest del messaggio è “tanto valido quanto” firmare l’intero messaggio, in particolare se si deve soddisfare il requisito della non falsificabilità, allora l’algoritmo di digest del messaggio deve avere la seguente proprietà aggiuntiva:
+	- è computazionalmente impossibile trovare due differenti messaggi x e y tali che H(x) = H(y).
+ significa che per un intruso è computazionalemente impossibile sostituire un messaggio a un altro che è protetto attraverso un digest del messaggio.
+Funzionamento: il sender passa il suo messaggio originale attraverso una funzione hush per creare un digest del messaggio. Successivamente egli cifra il digest del messaggio con la sua chiave privata. Il messaggio originale (con il testo in chiaro) insime al digest del messaggio firmato digitalmente (che chiameremo firma digitale) sono inviati al receiver. Il receiver applica la chiave pubblica del sender al messaggio per recuperare il digest del messaggio. Poi applica anche la funzione hash al messaggio con il testo in chiaro per ottenere il secondo digest di messaggio. Se i due digest coincidono, il receiver può stare tranquillo sull’integrità e sull’autore del messaggio.
+
+7.4.3	ALGORITMO PER LA FUNZIONE HUSH
+Calcoliao una checksum trattando ciascun carattere come un byte e addizionando tra loro questi byte usando contemporaneamente blocchi di 4 byte.
+7.6	CONTROLLO DELL’ACCESSO: FIREWALL
+Un firewall è una combinazione di harware e software che isola la rete interna di una società dal resto di internet, permettendo ad alcuni pacchetti di passare e bloccandone altri.
+Ci sono due tipi di firewall: firewall a filtraggio di pacchetto (che operano allo strato di rete) e i gateway a livello di applicazione (che operano ovviamente allo strato di applicazione).
+Firewall a filtraggio di pacchetto:
+Tutto il traffico che lascia la, e che entra nelle, rete interna passa da un determinato router, che si occupa di filtrare i pacchetti. I filtri di pacchetto funzionano effettuando un parsing delle intestazioni dei datagram e quindi applicando le regole di filtraggio contenute in un insieme di regole specificate dall’amministratore per determinare se scartare il datagram o lasciarlo passare. Le decisioni sul filtraggio sono basate su:
+    • indirizzi IP di sorgente/destinazione
+    • porte sorgente e destinazione TCP o UDP
+    • tipo di messaggio ICMP
+    • datagram di inizializzazione della connessione che usano i bit TCP SYN o ACK.ù
+Il filtraggio può essere basato su vari elementi: può essere impostato per bloccare tutti i segmenti UDP, per bloccare tutti i segmenti TCP il cui numero di porta sorgente o destinazione sia 23, può essere basata su una combinazione di indirizzi e numeri di porta, oppure sul fatto che il bit ACK del TCP sia impostato o meno.
+Gateway a livello delle applicazioni
+Per ottenere un livello superiore di sicurezza, i firewall devono combinare il filtraggio dei pacchetti con i gateway delle applicazioni, perché esse vanno oltre le intestazioni IP/TCP/UDP e attuano realmente una politica di decisione basata sui dati delle applicazioni. Un gateway delle applicazioni è un server specifico dell’applicazione attraverso il quale tutti i dati delle applicazioni (in ingresso e in uscita) devono passare. Più gateway possono funzionare sullo stesso host, ma ciascun gateway è un server separato con i propri processi.
+7.8	LA SICUREZZA IN MOLTI STUDI – PGP
+Sicurezza delle e-mail
+Alice e Bob vogliono confidenzialità, l’autenticazione del sender, l’integrità del messaggio e infine la segretezza. Il modo più semplice per Alice di fornire la segretezza è di cifrare il messaggio con la tecnologia a chiave pubblica.
+Confidenzialità: Facciamo uso di una chiave di sessione. Alice seleziona una chiave simmetrica, Ks, scelta a caso. Cifra il suo messaggio, m, con la chiave simmetrica. Cifra la chiave simmetrica con la chiave pubblica di Bob, Kb+. Concatena il messaggio cifrato e la chiave simmetrica cifrata per formare il “pacco” e lo invia all’indirizzo e-mail di Bob.
+Quando Bob riceve il pacco, egli usa la chiave privata Kb- per ottenere la chiave simmetrica, Ks, e la usa per decifrare il messaggio m.
+Autenticazione e integrità del sender: supponiamo che Alice e Bob non vogliono più preoccuparsi della segretezza. Per raggiungere questo obiettivo usiamo le firme digitali e i digest del messaggio. Nello specifico Alice applica una funzione hush, H al suo messaggio m per ottenere un digest del messaggio. Cifra il risultato della funzione hash con la sua chiave privata, Ka-, per creare una firma digitale. Concatena l’originale (messaggio non cifrato) con la firma per creare il pacco, e lo invia all’indirizzo e-mail di Bob.
+Quando Bob riceve il pacco applica la chiave pubblica di Alice, Ka+, al digest del messaggio firmato e confronta il risultato di questa operazione con la sua propria hash, H, del messaggio.
+Segretezza, autenticazione del sender e integrità del messaggio: Alice crea prima un pacco preliminare che consiste del suo messaggio originale con l’hash del messaggio firmato in modo digitale. (freccia 2)Tratta questo pacco preliminare come un messaggio in se stesso e invia questo nuovo messaggio creando un nuovo pacco che è inviato a Bob. (freccia 1).
+Quando Bob riceve il pacco, prima fa la freccia 1 poi la 2.
+Notiamo come Alice applica due volte la crittografia a chiave pubblica, in modo analogo lo fa anche Bob.
+
+
+
+PGP (pretty good privacy)
+È uno schema di cifratura delle e-mail che di fatto è diventato uno standard. Versioni di PGP sono disponibili di dominio pubblico. Il progetto del PGP è lo stesso dell’ultima figura (segretezza, autenticazione e integrità), il software PGP calcola il digest del messaggio e poi c’è il calcolo della crittografia a chiave simmetrica. E l’RSA per la crittografia a chiave pubblica. In più il PGP fornisce la compressione dei dati.
+Quando il PGP è installato, il software crea una coppia di chiavi per l’utente. La chiave pubblica può essere collocato sul sito Web o sul server di chiavi pubbliche. La chiave privata è protetta da una password, che deve essere inserita ogni volta che l’utente accede alla chiave privata. Il PGP da all’utente l’opzione di firmare digitalemnte il messaggio, di cifrarlo o di effettuare entrambe le operazioni.
+Il PGP fornisce anche un meccanismo per la certificazione della chiave pubblica. Le chiavi pubbliche PGP sono certificate attraverso una rete di fiducia.
+Mentre le chiavi pubbliche PGP sono distribuite fisicamente o attraverso un server di chiavi pubbliche PGP in Internet.
+
+VPN
+VPN + IPsec (entrambi prima strofa) + AH + ESP (entrambi seconda strofa) + security associations (SA) (terza strofa) + IKE (ultima strofa)
+
+Il protocollo di sicurezza IP, più comunemente noto come IPsec, fornisce sicurezza al
+livello di rete. IPsec protegge i datagrammi IP tra due entità di livello di rete qualsiasi,
+inclusi host e router. Molte istituzioni (corporazioni, enti governativi, ecc) usano IPsec per creare
+reti private virtuali (VPN) che corrono su Internet pubblica.
+Il carico utile crittografato potrebbe essere un segmento TCP, un segmento UDP, un messaggio ICMP, e così via.
+Se un tale servizio di livello di rete fosse in atto, tutti i dati inviati da un'entità all'altra
+inclusi e-mail, pagine web, messaggi di handshake TCP e messaggi di gestione
+(come ICMP e SNMP) sarebbero nascosti a qualsiasi terza parte che potrebbe sniffare la rete.
+Un protocollo di sicurezza a livello di rete potrebbe fornire l'integrità dei dati, in modo che l'entità ricevente possa
+controllare qualsiasi manomissione del datagramma che possa essere avvenuta mentre il datagramma
+era in transito. Un servizio di sicurezza a livello di rete potrebbe anche fornire la prevenzione dei replay-attack,
+in più fornisce l'autenticazione della fonte, in modo che l'entità ricevente possa verificare la fonte del datagramma protetto.
+
+Ci sono due protocolli principali: il protocollo Authentication Header (AH)
+e il protocollo Encapsulation Security Payload (ESP).
+Quando un'entità IPsec sorgente (tipicamente un host o un router) invia datagrammi sicuri ad un'entità
+destinazione (anch'essa un host o un router), lo fa con il protocollo AH o
+il protocollo ESP. Il protocollo AH fornisce l'autenticazione alla fonte e l'integrità dei dati
+ma non fornisce riservatezza. Il protocollo ESP fornisce autenticazione alla fonte,
+l'integrità dei dati e la riservatezza.
+
+Un'associazione di sicurezza (SA) è l'istituzione di attributi di sicurezza condivisi tra due entità di rete per supportare una comunicazione sicura.
+Una SA può includere attributi come: algoritmo crittografico e modalità; chiave di crittografia del traffico; e parametri per i dati di lrete da passare sulla connessione.
+Una SA è una connessione simplex (canale unidirezionale) e logica che avalla e fornisce una connessione dati sicura tra i dispositivi di rete.
+In particolare una SA è costituita dai seguenti parametri:
+- Gli indirizzi IP dei peer coinvolti nella comunicazione
+- Il protocollo che verrà utilizzato per il tunnel (AH o ESP)
+- le tecniche di cifratura utilizzate e le relative chiavi
+- Un intero a 32 bit chiamato SPI, acronimo per Security Parameter Index.
+
+
+IKE è un acronimo per Internet key exchange ed è il protocollo usato per stabilire una security association nella suite di protocolli IPsec.
+È un protocollo di livello applicazione e utilizza il protocollo UDP come protocollo di trasporto.
+L'obiettivo di IKE è stabilire uno shared session secret, ossia una chiave condivisa corrispondente alla sessione da instaurare,
+dallo shared secret vengono successivamente derivate le chiavi crittografiche che verranno utilizzate per la successiva comunicazione.
+Al fine di autenticare le entità coinvolte nella comunicazione possono essere utilizzate tecniche a chiave simmetrica o, alternativamente, a chiave asimmetrica;
+in quest'ultimo caso si fa ricorso a infrastrutture a chiave pubblica (PKI) e all'uso di certificati digitali.
