@@ -1,5 +1,5 @@
 //Server.c
-//Made by FERDINANDO OTTAVIANI & SAMUELE TAGLIENTI
+//Made by FERDINANDO OTTAVIANI & SAMUELE TAGLIENTI.
 #include<sys/socket.h>
 #include<arpa/inet.h>
 #include<stdio.h>
